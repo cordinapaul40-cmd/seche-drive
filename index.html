@@ -553,6 +553,12 @@ const REC = [
 ];
 const TYPES = [{n:"Leg Day",c:"t0",m:1.07,sub:"Plus de glucides pour la séance jambes"},{n:"Haut du corps",c:"t1",m:1.03,sub:"Glucides modérés, protéines hautes"},{n:"Repos",c:"t2",m:0.90,sub:"Récupération : moins de glucides, mêmes protéines"}];
 const DRIVE_URL = "https://www.leclercdrive.fr/region-nouvelle-aquitaine/dax/drive-saint-paul-les-dax.aspx";
+// Sur Android, ouvre l'appli Leclerc Drive (com.infomil.leclercdrive) si elle est installée, sinon le site du magasin.
+const DRIVE_APP = "com.infomil.leclercdrive";
+const IS_ANDROID = /Android/i.test(navigator.userAgent);
+const driveHref = () => IS_ANDROID
+  ? "intent://" + DRIVE_URL.replace(/^https:\/\//, "") + "#Intent;scheme=https;package=" + DRIVE_APP + ";S.browser_fallback_url=" + encodeURIComponent(DRIVE_URL) + ";end"
+  : DRIVE_URL;
 
 /* ---------- Dates ---------- */
 const pad = n => String(n).padStart(2,"0");
@@ -1008,7 +1014,7 @@ function renderCourses(){
       <div class="shop-head"><div><div class="label">Total estimé</div><div class="big" style="${over ? "color:var(--bad)" : ""}">${eur(sh.cost)} <small>/ ${eur(bw)}</small></div></div>
         <div style="text-align:right"><div class="label">Dans le caddie</div><div class="big">${got}<small>/${buy.length}</small></div></div></div>
       <div class="gauge ${over ? "over" : ""}"><i style="width:${Math.min(100, sh.cost/bw*100)}%"></i></div>
-      <div class="row"><a class="btn primary" href="${DRIVE_URL}" target="_blank" rel="noopener">Ouvrir le Drive</a><button data-act="copy">Copier la liste</button></div>
+      <div class="row"><a class="btn primary" href="${driveHref()}"${IS_ANDROID ? "" : ' target="_blank"'} rel="noopener">Ouvrir le Drive</a><button data-act="copy">Copier la liste</button></div>
     </div>
     ${RAYONS.filter(r => byR[r]).map(r => `<div class="rayon">${r}</div><div class="list">${byR[r].map(l => { const i = ing(l.id), done = S.done[l.id];
       const sub = l.owned ? "déjà au placard" : !l.packs ? "couvert par le placard" : `${l.packs} × ${i.pl} · besoin ${qty(l.id, l.need)}`;
