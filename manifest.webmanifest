@@ -1,0 +1,17 @@
+{
+  "name": "Sèche & Drive",
+  "short_name": "Sèche & Drive",
+  "description": "Menus de sèche sous budget et liste de courses Leclerc Drive.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D0E11",
+  "theme_color": "#0D0E11",
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
