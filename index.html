@@ -1941,6 +1941,7 @@ renderToday = function(){
   const el = $("#v-today"), W = sortedW(), last = W.length ? W[W.length-1].d : null;
   let extra = "";
   if (installEvt && !standalone()) extra += `<div class="card tight"><h3>Installe l'appli</h3><p class="small muted">Icône sur l'écran d'accueil, plein écran, marche sans internet.</p><button class="primary" data-act="install">Installer</button></div>`;
+  else if (!standalone()) extra += `<div class="card tight"><h3>Tu es dans Chrome</h3><p class="small muted">Pour l'avoir en vraie appli plein écran : menu ⋮ de Chrome puis « Installer l'application ». Si tu as déjà un raccourci Shredly qui s'ouvre dans Chrome, supprime-le de l'écran d'accueil et refais l'installation.</p></div>`;
   if (parse(TODAY).getDay() === S.weighDay && last !== TODAY) extra += `<div class="card tight"><h3>C'est le jour de la pesée</h3><p class="small muted">Le matin, à jeun, après être passé aux toilettes.</p><button data-act="nav" data-v="progres">Noter mon poids</button></div>`;
   if (extra) el.insertAdjacentHTML("afterbegin", extra);
 };
