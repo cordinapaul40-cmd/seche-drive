@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0D0E11">
-<meta name="description" content="Menus de sèche sous budget et liste de courses Leclerc Drive.">
+<meta name="description" content="Shredly : menus de sèche sous budget et liste de courses Leclerc Drive.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
-<title>Sèche & Drive</title>
+<title>Shredly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap">
@@ -25,14 +25,44 @@
   --f-display:"Barlow Condensed", "Arial Narrow", "Roboto Condensed", system-ui, sans-serif;
   --f-body:"Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
   --r-lg:20px; --r-md:14px; --r-sm:10px;
+  --d-style:italic; --d-weight:800; --hero-size:clamp(3rem,15vw,4.6rem); --d-case:uppercase;
+  --hero-pattern:repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in srgb,var(--tc) 7%,transparent) 22px 24px);
   color-scheme:dark;
 }
+/* Galerie de thèmes : chaque thème redéfinit les jetons, les polices et les formes. */
+:root[data-skin="neon"]{ --bg:#0B0820; --surface:#151033; --raised:#1D1745; --track:#2D2560; --line:#2B2356; --ink:#F4F0FF; --muted:#A49CC8; --faint:#6E6699;
+  --accent:#FF2BD6; --accent-2:#FF7AE9; --accent-ink:#1A0016; --prot:#22E1FF; --ok:#3CFFA4; --warn:#FFE14D; --bad:#FF5470; --rest:#8F87B8;
+  --f-display:"Orbitron", "Arial Black", sans-serif; --f-body:"Exo 2", system-ui, sans-serif; --d-style:normal; --d-weight:800; --hero-size:clamp(2.2rem,11vw,3.4rem);
+  --hero-pattern:linear-gradient(transparent 0 0), repeating-linear-gradient(0deg, color-mix(in srgb,var(--tc) 9%,transparent) 0 1px, transparent 1px 18px), repeating-linear-gradient(90deg, color-mix(in srgb,var(--tc) 9%,transparent) 0 1px, transparent 1px 18px); color-scheme:dark }
+:root[data-skin="ocean"]{ --bg:#07141F; --surface:#0D1F2E; --raised:#132A3D; --track:#1D3A52; --line:#1A3348; --ink:#E6F4FF; --muted:#8EB0C7; --faint:#5D7F96;
+  --accent:#19C3B5; --accent-2:#5EE6D8; --accent-ink:#04201D; --prot:#5AA9FF; --ok:#3DDC97; --warn:#FFC857; --bad:#FF6B6B; --rest:#8AA3B5;
+  --f-display:"Archivo", system-ui, sans-serif; --f-body:"Archivo", system-ui, sans-serif; --d-style:normal; --d-weight:800; --r-lg:26px; --r-md:18px;
+  --hero-pattern:radial-gradient(circle at 20% 120%, color-mix(in srgb,var(--tc) 18%,transparent), transparent 60%); color-scheme:dark }
+:root[data-skin="foret"]{ --bg:#0E1410; --surface:#151E18; --raised:#1C2820; --track:#26352B; --line:#243128; --ink:#EEF3EA; --muted:#9DB0A0; --faint:#6A7E6E;
+  --accent:#E9A23B; --accent-2:#F4C06F; --accent-ink:#1E1303; --prot:#7CC4A0; --ok:#7CD992; --warn:#F2C14E; --bad:#F07167; --rest:#93A596;
+  --f-display:"Oswald", "Arial Narrow", sans-serif; --f-body:"Source Sans 3", system-ui, sans-serif; --d-style:normal; --d-weight:700; --r-lg:12px; --r-md:10px; --r-sm:8px; color-scheme:dark }
+:root[data-skin="arcade"]{ --bg:#111111; --surface:#1A1A1A; --raised:#242424; --track:#333333; --line:#3A3A3A; --ink:#F5F1DC; --muted:#B8B39A; --faint:#7A7766;
+  --accent:#FFD400; --accent-2:#FFE866; --accent-ink:#111111; --prot:#00E5FF; --ok:#7CFF4F; --warn:#FF9F1C; --bad:#FF3B3B; --rest:#A09C88;
+  --f-display:"Silkscreen", "Courier New", monospace; --f-body:"IBM Plex Mono", ui-monospace, monospace; --d-style:normal; --d-weight:700; --hero-size:clamp(2rem,10vw,3rem);
+  --r-lg:0px; --r-md:0px; --r-sm:0px; --hero-pattern:repeating-linear-gradient(0deg, color-mix(in srgb,var(--tc) 8%,transparent) 0 2px, transparent 2px 6px); color-scheme:dark }
+:root[data-skin="frais"]{ --bg:#F2F6F0; --surface:#FFFFFF; --raised:#EAF1E7; --track:#D6E2D2; --line:#DAE4D6; --ink:#16241A; --muted:#566A5B; --faint:#8A998D;
+  --accent:#1E9A52; --accent-2:#2AB866; --accent-ink:#FFFFFF; --prot:#2F7DD1; --ok:#1E9A52; --warn:#B87908; --bad:#D23F3F; --rest:#738279;
+  --f-display:"Nunito", system-ui, sans-serif; --f-body:"Nunito", system-ui, sans-serif; --d-style:normal; --d-weight:900; --d-case:none; --r-lg:24px; --r-md:18px; --r-sm:12px;
+  --hero-pattern:radial-gradient(circle at 90% 0%, color-mix(in srgb,var(--tc) 14%,transparent), transparent 55%); color-scheme:light }
+:root[data-skin="papier"]{ --bg:#F7F6F1; --surface:#FFFFFF; --raised:#EFEEE8; --track:#E1E0D8; --line:#DFDED6; --ink:#121212; --muted:#5F5E58; --faint:#97968E;
+  --accent:#121212; --accent-2:#3A3A3A; --accent-ink:#FFFFFF; --prot:#3B5BDB; --ok:#2B8A3E; --warn:#D9480F; --bad:#C92A2A; --rest:#868E96;
+  --f-display:"DM Serif Display", Georgia, serif; --f-body:"DM Sans", system-ui, sans-serif; --d-style:normal; --d-weight:400; --d-case:none; --r-lg:6px; --r-md:4px; --r-sm:4px;
+  --hero-pattern:linear-gradient(transparent, transparent); color-scheme:light }
+:root[data-skin="fraise"]{ --bg:#FFF4F6; --surface:#FFFFFF; --raised:#FFE7ED; --track:#F6CFD9; --line:#F3D3DB; --ink:#3A1420; --muted:#8A5A68; --faint:#B88C99;
+  --accent:#E8336D; --accent-2:#FF6F96; --accent-ink:#FFFFFF; --prot:#7B61FF; --ok:#1F9E69; --warn:#C98400; --bad:#D7263D; --rest:#A7838E;
+  --f-display:"Baloo 2", system-ui, sans-serif; --f-body:"Quicksand", system-ui, sans-serif; --d-style:normal; --d-weight:800; --d-case:none; --r-lg:28px; --r-md:22px; --r-sm:14px;
+  --hero-pattern:radial-gradient(circle at 15% 20%, color-mix(in srgb,var(--tc) 12%,transparent) 0 6px, transparent 7px) 0 0/34px 34px; color-scheme:light }
 *{box-sizing:border-box}
 html,body{background:var(--bg)}
 body{color:var(--ink);font:16px/1.45 var(--f-body);padding-inline:16px;padding-block:0 calc(96px + env(safe-area-inset-bottom,0px));font-variant-numeric:tabular-nums;-webkit-tap-highlight-color:transparent}
 .app{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 h1,h2,h3{margin:0;font-family:var(--f-display);text-wrap:balance;line-height:1.05;letter-spacing:.01em}
-h2{font-size:1.55rem;font-weight:700;text-transform:uppercase}
+h2{font-size:1.55rem;font-weight:700;text-transform:var(--d-case)}
 h3{font-size:1.15rem;font-weight:700}
 p{margin:0}
 .muted{color:var(--muted)} .small{font-size:.86rem} .faint{color:var(--faint)}
@@ -41,7 +71,7 @@ p{margin:0}
 
 /* Barre du haut */
 .appbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 10px;background:linear-gradient(var(--bg) 70%, transparent)}
-.brand{font:italic 800 1.35rem var(--f-display);letter-spacing:.02em;text-transform:uppercase}
+.brand{font:var(--d-style) var(--d-weight) 1.35rem var(--f-display);letter-spacing:.02em;text-transform:var(--d-case)}
 .brand b{color:var(--accent)}
 .flame{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font:700 1rem var(--f-display)}
 .flame svg{width:18px;height:18px}
@@ -66,11 +96,11 @@ button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible
 
 /* Aujourd'hui : héros */
 .hero{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:22px 20px 20px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
-.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in srgb,var(--tc) 7%,transparent) 22px 24px);pointer-events:none}
+.hero::before{content:"";position:absolute;inset:0;background:var(--hero-pattern);pointer-events:none}
 .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(color-mix(in srgb,var(--tc) 35%,transparent),transparent 70%);pointer-events:none}
 .hero > *{position:relative}
 .hero .kicker{font:600 .8rem var(--f-body);text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
-.hero .session{font:italic 800 clamp(3rem,15vw,4.6rem)/.9 var(--f-display);text-transform:uppercase;color:var(--tc);letter-spacing:-.005em}
+.hero .session{font:var(--d-style) var(--d-weight) var(--hero-size)/.95 var(--f-display);text-transform:var(--d-case);color:var(--tc);letter-spacing:-.005em}
 .hero .sub{color:var(--muted);font-size:.95rem}
 .hero .cycle{display:flex;gap:6px;margin-top:8px}
 .hero .cycle span{flex:1;height:5px;border-radius:3px;background:var(--track)}
@@ -173,7 +203,7 @@ svg.chart text{fill:var(--muted);font:12px var(--f-body)}
 
 /* Feuille de détail */
 .sheet{position:fixed;inset:0;z-index:40;display:flex;align-items:flex-end;justify-content:center}
-.sheet-bg{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.sheet-bg{position:absolute;inset:0;background:color-mix(in srgb,#000 55%,transparent)}
 .sheet-panel{position:relative;width:100%;max-width:600px;max-height:88%;overflow-y:auto;background:var(--surface);border-radius:24px 24px 0 0;border:1px solid var(--line);padding:22px 18px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:16px;animation:up .28s cubic-bezier(.2,.8,.2,1)}
 .sheet-panel .grab{width:44px;height:5px;border-radius:3px;background:var(--track);align-self:center;margin-top:-8px}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
@@ -194,7 +224,7 @@ label.dis{font-size:.74rem;color:var(--muted);display:inline-flex;gap:5px;align-
 .cook .stepbar{display:flex;gap:4px}
 .cook .stepbar span{flex:1;height:4px;border-radius:2px;background:var(--track)}
 .cook .stepbar span.on{background:var(--accent)}
-.cook .stepnum{font:italic 800 1.2rem var(--f-display);color:var(--accent);text-transform:uppercase}
+.cook .stepnum{font:var(--d-style) var(--d-weight) 1.2rem var(--f-display);color:var(--accent);text-transform:uppercase}
 .cook .steptext{font:600 clamp(1.4rem,6vw,2rem)/1.3 var(--f-body);flex:1;overflow-y:auto}
 .cook .steptext ul{font-size:1.1rem;font-weight:500;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px}
 .timer{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px;display:flex;flex-direction:column;gap:10px}
@@ -204,8 +234,26 @@ label.dis{font-size:.74rem;color:var(--muted);display:inline-flex;gap:5px;align-
 .presets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .presets button{padding:8px 4px}
 
-.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:999px;font-weight:700;font-size:.92rem;max-width:calc(100% - 32px);text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:18px;font-weight:700;font-size:.92rem;width:max-content;max-width:min(360px,calc(100% - 32px));text-align:center}
 [hidden]{display:none!important}
+/* Galerie */
+.skins{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.skin{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:var(--r-md);border:2px solid var(--line);background:var(--raised);cursor:pointer;text-align:left;color:var(--ink);min-height:0;font:inherit}
+.skin.on{border-color:var(--accent)}
+.skin .mock{height:78px;border-radius:10px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.skin .mock b{font-size:1.25rem;line-height:1}
+.skin .mock i{display:block;height:6px;border-radius:3px}
+.skin .nm{font-weight:700;font-size:.92rem}
+.skin .ds{font-size:.76rem;color:var(--muted)}
+/* Alertes et remplacements */
+.alert{border-color:color-mix(in srgb,var(--warn) 60%,transparent);background:color-mix(in srgb,var(--warn) 8%,var(--surface))}
+.swapped{border-style:dashed}
+.typepick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.typepick button{flex-direction:column;border-radius:var(--r-md);min-height:72px;font-weight:700}
+.typepick button.on{border-color:var(--tc);color:var(--tc);background:color-mix(in srgb,var(--tc) 12%,var(--raised))}
+.preview{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.preview div{background:var(--raised);border-radius:var(--r-sm);padding:8px}
+.preview b{display:block;font:700 1.1rem var(--f-display)}
 .view{display:flex;flex-direction:column;gap:14px}
 .empty{color:var(--muted);text-align:center;padding:12px}
 @media (max-width:420px){ .rings{grid-template-columns:120px 1fr} .rings svg{width:120px;height:120px} .badges{grid-template-columns:repeat(3,1fr)} .stat{padding:10px} .stat .v{font-size:1.25rem} .macrorow{grid-template-columns:repeat(2,1fr)} }
@@ -214,7 +262,7 @@ label.dis{font-size:.74rem;color:var(--muted);display:inline-flex;gap:5px;align-
 
 <div class="app">
   <header class="appbar">
-    <div class="brand">Sèche <b>&amp;</b> Drive</div>
+    <div class="brand">Shred<b>ly</b></div>
     <div class="flame" id="flame" title="Série de jours où tu as suivi le plan"></div>
   </header>
   <main>
@@ -311,6 +359,16 @@ const ING = {
   tomatesf:{n:"Tomates",r:"Fruits & légumes",pk:1000,pl:"1 kg",px:2.50,k:18,p:0.9,g:3,l:0.2},
   concombre:{n:"Concombre",r:"Fruits & légumes",pk:400,pl:"pièce (≈ 400 g)",px:0.79,k:12,p:0.6,g:2,l:0.1},
   cacao:{n:"Cacao en poudre non sucré",r:"Épicerie sucrée",pk:250,pl:"boîte 250 g",px:2.10,k:380,p:20,g:15,l:20,stock:1},
+  gnocchi:{n:"Gnocchi",r:"Crèmerie & œufs",pk:500,pl:"paquet 500 g",px:1.29,k:150,p:4,g:32,l:0.5},
+  patdouce:{n:"Patates douces",r:"Fruits & légumes",pk:1000,pl:"1 kg",px:2.49,k:86,p:1.6,g:20,l:0.1},
+  butternut:{n:"Courge butternut",r:"Fruits & légumes",pk:1200,pl:"pièce (≈ 1,2 kg)",px:1.79,k:45,p:1,g:10,l:0.1},
+  skyr:{n:"Skyr nature",r:"Crèmerie & œufs",pk:450,pl:"pot 450 g",px:1.79,k:60,p:10,g:4,l:0.2},
+  cottage:{n:"Cottage cheese",r:"Crèmerie & œufs",pk:200,pl:"pot 200 g",px:1.45,k:98,p:11,g:3,l:4.5},
+  lardons:{n:"Lardons allumettes",r:"Boucherie & charcuterie",pk:150,pl:"2 × 75 g",px:1.69,k:250,p:15,g:0,l:21},
+  crevettes:{n:"Crevettes décortiquées",r:"Surgelés",pk:400,pl:"sachet 400 g",px:4.99,k:80,p:18,g:0,l:1},
+  tofu:{n:"Tofu nature",r:"Crèmerie & œufs",pk:400,pl:"2 × 200 g",px:2.49,k:120,p:12,g:2,l:7},
+  coco:{n:"Lait de coco",r:"Épicerie salée",pk:400,pl:"boîte 40 cl",px:1.39,k:170,p:1.5,g:3,l:17},
+  fruitsr:{n:"Fruits rouges",r:"Surgelés",pk:500,pl:"sachet 500 g",px:2.69,k:45,p:1,g:8,l:0.3},
   huile:{n:"Huile de colza",r:"Épicerie salée",pk:920,pl:"bouteille 1 L",px:2.35,k:900,p:0,g:0,l:100,stock:1},
   epices:{n:"Épices (curry, paprika, cumin)",r:"Épicerie salée",pk:40,pl:"pot",px:1.30,k:300,p:12,g:40,l:10,stock:1},
   soja:{n:"Sauce soja",r:"Épicerie salée",pk:250,pl:"bouteille 25 cl",px:1.65,k:60,p:8,g:7,l:0,stock:1},
@@ -426,6 +484,72 @@ const REC = [
    ins:"Cuire les flocons dans le lait avec le cacao 3 min. Hors du feu, ajouter le fromage blanc et la banane."},
   {id:"overnight",n:"Overnight oats pomme-cannelle",s:[1],P:["fblanc",200,650],G:["avoine",60,240],F:[["pommes",150],["lait",150],["epices",2]],
    ins:"La veille : mélanger flocons, lait, fromage blanc, pomme râpée et cannelle dans une boîte. Au frigo toute la nuit."},
+  {id:"gnocchitomate",n:"Gnocchi poulet, tomate & mozzarella",s:[1,2],P:["poulet",120,320],G:["gnocchi",150,800],F:[["tomates",200],["mozza",40],["epices",1]],
+   ins:"Dorer les gnocchi à la poêle 5 min. Ajouter le poulet en dés cuit et la tomate, mozzarella en morceaux à la fin, couvrir 2 min."},
+  {id:"gnocchidinde",n:"Gnocchi à la dinde, épinards & crème",s:[1,2],P:["dinde",120,320],G:["gnocchi",150,800],F:[["epinards",150],["creme",30]],
+   ins:"Dinde en lanières à la poêle, ajouter épinards et crème. Gnocchi poêlés à part puis mélangés à la sauce."},
+  {id:"patdoucepoulet",n:"Poulet, patates douces rôties & brocolis",s:[1,2],P:["poulet",120,320],G:["patdouce",200,1000],F:[["brocolis",200],["huile",10],["epices",3]],
+   ins:"Patates douces en cubes avec huile et paprika, 30 min à 200 °C. Poulet à la poêle, brocolis vapeur."},
+  {id:"crevettescoco",n:"Curry de crevettes au lait de coco & riz",s:[1,2],P:["crevettes",100,320],G:["riz",50,260],F:[["coco",80],["poivrons",150],["epices",3]],
+   ins:"Faire revenir poivrons et curry, ajouter lait de coco et crevettes encore surgelées, mijoter 8 min. Servir sur le riz."},
+  {id:"crevetteswok",n:"Nouilles sautées aux crevettes",s:[1,2],P:["crevettes",100,320],G:["pates",50,260],F:[["wok",250],["soja",15],["huile",6]],
+   ins:"Saisir crevettes et légumes au wok, ajouter les pâtes cuites et la sauce soja. 3 min à feu vif."},
+  {id:"tofubroco",n:"Tofu sauté soja, riz & brocolis",s:[1,2],P:["tofu",150,450],G:["riz",50,260],F:[["brocolis",200],["soja",15],["huile",6]],
+   ins:"Tofu en cubes bien égoutté, doré 8 min à la poêle, puis laqué à la sauce soja. Riz et brocolis à côté."},
+  {id:"tofucurry",n:"Curry de tofu coco & épinards",s:[1,2],P:["tofu",150,450],G:["riz",50,260],F:[["coco",60],["epinards",150],["epices",3]],
+   ins:"Tofu doré, ajouter épinards, curry et lait de coco, mijoter 10 min. Servir sur le riz."},
+  {id:"skyrbowl",n:"Bowl skyr, avoine & fruits rouges",s:[1],P:["skyr",200,650],G:["avoine",50,240],F:[["fruitsr",120],["cacahuete",10]],
+   ins:"Skyr dans un bol, flocons d'avoine, fruits rouges décongelés et une cuillère de beurre de cacahuète."},
+  {id:"cottagetoast",n:"Tartines cottage cheese, tomates & œuf",s:[1],P:["cottage",100,400],G:["pain",60,300],F:[["tomatesf",120],["oeufs",60]],
+   ins:"Pain grillé, cottage cheese, rondelles de tomate et un œuf au plat par-dessus."},
+  {id:"carbonara",n:"Carbonara légère",s:[1,2],P:["oeufs",120,300],G:["pates",50,260],F:[["lardons",40],["fblanc",60],["emmental",15]],
+   ins:"Lardons grillés à sec. Hors du feu, mélanger pâtes chaudes, œufs battus avec le fromage blanc et l'emmental, puis les lardons."},
+  {id:"tartiflette",n:"Tartiflette légère au jambon",s:[1,2],P:["jambon",80,320],G:["pdt",200,1000],F:[["oignons",60],["creme",40],["emmental",30]],
+   ins:"Pommes de terre cuites en rondelles, oignons fondus, jambon, crème et emmental. 20 min à 200 °C."},
+  {id:"veloutebutternut",n:"Velouté de butternut, poulet grillé & pain",s:[1,2],P:["poulet",120,320],G:["pain",60,300],F:[["butternut",300],["creme",20],["oignons",40]],
+   ins:"Cuire butternut et oignon 20 min dans l'eau, mixer avec la crème. Poulet grillé en lamelles et pain à côté. Plat de saison."},
+  {id:"risotto",n:"Risotto poulet-champignons",s:[1,2],P:["poulet",120,320],G:["riz",50,260],F:[["champignons",115],["oignons",40],["emmental",20],["creme",20]],
+   ins:"Nacrer le riz avec l'oignon, mouiller d'eau chaude louche par louche 18 min. Ajouter poulet cuit, champignons, crème et emmental."},
+  {id:"paella",n:"Paella express poulet-crevettes",s:[1,2],P:["poulet",120,320],G:["riz",50,260],F:[["crevettes",80],["ppois",100],["poivrons",100],["tomates",100],["epices",3],["huile",6]],
+   ins:"Dorer le poulet, ajouter poivrons, tomates, paprika et riz, mouiller d'eau, 18 min à couvert. Crevettes et petits pois les 5 dernières minutes."},
+  {id:"chilipoulet",n:"Chili au poulet & riz",s:[1,2],P:["poulet",120,320],G:["riz",50,260],F:[["hrouges",125],["mais",60],["tomates",200],["epices",4]],
+   ins:"Poulet en petits dés revenu avec cumin et paprika, ajouter haricots, maïs et tomates, mijoter 15 min."},
+  {id:"quesadillas",n:"Quesadillas poulet-haricots",s:[1,2],P:["poulet",120,320],G:["tortillas",80,320],F:[["hrouges",80],["emmental",30],["poivrons",80]],
+   ins:"Garnir une moitié de tortilla de poulet, haricots, poivrons et emmental, plier et dorer 2 min de chaque côté."},
+  {id:"teriyaki",n:"Bowl teriyaki de dinde",s:[1,2],P:["dinde",120,320],G:["riz",50,260],F:[["carottes",100],["hverts",100],["soja",20]],
+   ins:"Dinde en lanières laquée à la sauce soja réduite. Riz, carottes râpées et haricots verts en bowl."},
+  {id:"dindepatdouce",n:"Dinde au paprika & patates douces",s:[1,2],P:["dinde",120,320],G:["patdouce",200,1000],F:[["poivrons",100],["epices",3],["huile",8]],
+   ins:"Patates douces en frites au four 25 min. Dinde et poivrons au paprika à la poêle."},
+  {id:"steakpatdouce",n:"Steak haché, purée de patate douce & haricots",s:[1,2],P:["steak",100,300],G:["patdouce",200,1000],F:[["hverts",200],["huile",6]],
+   ins:"Patates douces cuites 15 min à l'eau puis écrasées. Steaks à la poêle, haricots verts."},
+  {id:"lasagnes",n:"Lasagnes express au bœuf",s:[1,2],P:["steak",100,300],G:["pates",50,260],F:[["tomates",300],["emmental",30],["fblanc",80]],
+   ins:"Bolognaise rapide, alterner pâtes cuites, sauce et fromage blanc dans un plat, emmental dessus. 20 min à 200 °C."},
+  {id:"courgettesfarcies",n:"Courgettes farcies au bœuf & riz",s:[1,2],P:["steak",100,300],G:["riz",50,260],F:[["courgettes",300],["tomates",150],["emmental",20]],
+   ins:"Évider les courgettes, farcir de viande hachée mélangée à la chair et à la tomate, emmental dessus. 30 min à 200 °C. Riz à côté."},
+  {id:"porcsoja",n:"Porc laqué soja, riz & haricots verts",s:[1,2],P:["porc",120,320],G:["riz",50,260],F:[["hverts",200],["soja",20],["huile",6]],
+   ins:"Porc en fines tranches saisi puis laqué avec la sauce soja. Riz et haricots verts."},
+  {id:"porcpatdouce",n:"Porc rôti, patates douces & carottes",s:[1,2],P:["porc",120,320],G:["patdouce",200,1000],F:[["carottes",150],["huile",8],["epices",2]],
+   ins:"Tout au four sur la même plaque : porc, patates douces et carottes en morceaux, 40 min à 190 °C."},
+  {id:"fishchips",n:"Fish & chips au four",s:[1,2],P:["colin",150,450],G:["pdt",200,1000],F:[["ppois",120],["huile",12]],
+   ins:"Frites maison au four 30 min, colin assaisonné posé dessus les 12 dernières minutes. Petits pois écrasés à côté."},
+  {id:"colincoco",n:"Colin au lait de coco & riz",s:[1,2],P:["colin",150,450],G:["riz",50,260],F:[["coco",60],["epinards",150],["epices",3]],
+   ins:"Mijoter épinards, curry et lait de coco 5 min, ajouter le colin et couvrir 10 min. Riz à côté."},
+  {id:"poke",n:"Poke bowl au thon",s:[1,2],P:["thon",104,312],G:["riz",50,260],F:[["concombre",100],["carottes",80],["mais",50],["soja",15]],
+   ins:"Riz tiède, thon, concombre en dés, carotte râpée, maïs et un filet de sauce soja."},
+  {id:"tartinessardines",n:"Tartines de sardines & crudités",s:[1,2],P:["sardines",95,285],G:["pain",60,300],F:[["tomatesf",150],["concombre",100]],
+   ins:"Écraser les sardines à la fourchette, tartiner sur le pain grillé. Tomates et concombre en salade."},
+  {id:"frittata",n:"Frittata courgettes-feta & pain",s:[1,2],P:["oeufs",120,300],G:["pain",60,300],F:[["courgettes",200],["feta",30],["huile",6]],
+   ins:"Courgettes en rondelles poêlées 8 min, verser les œufs battus et la feta, cuire à couvert à feu doux 10 min."},
+  {id:"oeufscocotte",n:"Œufs cocotte aux épinards & mouillettes",s:[1],P:["oeufs",120,300],G:["pain",60,300],F:[["epinards",150],["creme",20]],
+   ins:"Épinards au fond de ramequins, casser les œufs, une cuillère de crème. 12 min à 180 °C. Mouillettes de pain grillé."},
+  {id:"dahlpoulet",n:"Dahl coco, poulet & riz",s:[1,2],P:["poulet",120,320],G:["riz",50,260],F:[["lcorail",60],["coco",50],["tomates",150],["epices",3]],
+   ins:"Lentilles corail, tomates, coco et curry mijotés 15 min. Ajouter le poulet poêlé. Servir avec le riz."},
+  {id:"salade_hblancs",n:"Salade haricots blancs, thon & tomates",s:[1,2],P:["thon",104,312],G:["hblancs",125,750],F:[["tomatesf",150],["oignons",30],["huile",10],["pain",60]],
+   ins:"Haricots blancs rincés, thon, tomates, oignon émincé, vinaigrette. Pain à côté."},
+  {id:"houmous",n:"Wraps houmous maison & poulet",s:[1,2],P:["poulet",120,320],G:["tortillas",80,320],F:[["pchiches",130],["fblanc",40],["concombre",100],["huile",8]],
+   ins:"Mixer pois chiches, fromage blanc, huile et cumin pour le houmous. Tartiner les wraps, ajouter poulet et concombre."},
+  {id:"crepes",n:"Crêpes avoine, skyr & fruits rouges",s:[1],P:["skyr",200,650],G:["avoine",50,240],F:[["oeufs",120],["lait",150],["fruitsr",100]],
+   ins:"Mixer avoine, œufs et lait, cuire de fines crêpes. Garnir de skyr et de fruits rouges."},
 ];
 const TYPES = [{n:"Leg Day",c:"t0",m:1.07,sub:"Plus de glucides pour la séance jambes"},{n:"Haut du corps",c:"t1",m:1.03,sub:"Glucides modérés, protéines hautes"},{n:"Repos",c:"t2",m:0.90,sub:"Récupération : moins de glucides, mêmes protéines"}];
 const DRIVE_URL = "https://www.leclercdrive.fr/region-nouvelle-aquitaine/dax/drive-saint-paul-les-dax.aspx";
@@ -443,7 +567,7 @@ const TODAY = iso(new Date());
 const KEY = "seche-drive.v1";
 const DEF = {
   profile:{sexe:"H",age:21,taille:180,poids:90,activite:1.55,deficit:20,prot:1.8,lip:0.8,budgetMois:200,cycleStart:TODAY,startDate:TODAY,objectif:82},
-  prices:{}, excl:[], exclR:[], plan:null, placard:{}, owned:["huile","epices"], weights:[{d:TODAY,kg:90}], adj:0, done:{}, eaten:{}, ratings:{}, badges:{}, history:[], bestStreak:0
+  prices:{}, excl:[], exclR:[], plan:null, placard:{}, owned:["huile","epices"], weights:[{d:TODAY,kg:90}], adj:0, done:{}, eaten:{}, ratings:{}, badges:{}, history:[], bestStreak:0, dayType:{}, shifts:[], swaps:{}, skin:"sport"
 };
 let S;
 try { S = JSON.parse(localStorage.getItem(KEY)) || null; } catch(e) { S = null; }
@@ -458,7 +582,7 @@ const n0 = v => Math.round(v).toLocaleString("fr-FR");
 const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
 const budgetWeek = () => S.profile.budgetMois * 12 / 52;
 const latestWeight = () => { const w = [...S.weights].sort((a,b)=>a.d<b.d?-1:1); return w.length ? w[w.length-1].kg : S.profile.poids; };
-const typeOf = date => ((diffDays(date, S.profile.cycleStart) % 3) + 3) % 3;
+const typeOf = date => S.dayType && S.dayType[date] !== undefined ? S.dayType[date] : ((diffDays(date, S.profile.cycleStart) % 3) + 3) % 3;
 
 /* ---------- Besoins ---------- */
 function needs(){
@@ -568,7 +692,7 @@ function optimize(start){
     const plan = emptyPlan(start);
     plan.days.forEach(d => d.meals = [pick(p1), pick(p2)]);
     let cur = score(plan).s;
-    for (let it = 0; it < 4000; it++){
+    for (let it = 0; it < 6000; it++){
       const di = Math.floor(Math.random()*7), mi = Math.random() < .5 ? 0 : 1;
       const old = plan.days[di].meals[mi];
       let dj, mj, old2;
@@ -580,7 +704,7 @@ function optimize(start){
         const used = plan.days.flatMap(d => d.meals).filter(id => REC_BY[id].s.includes(mi+1));
         plan.days[di].meals[mi] = pick(used);
       } else plan.days[di].meals[mi] = pick(mi ? p2 : p1);
-      const ns = score(plan).s, temp = 4 * Math.pow(0.0025, it/4000); // recuit simulé
+      const ns = score(plan).s, temp = 4 * Math.pow(0.0025, it/6000); // recuit simulé
       if (ns <= cur || Math.random() < Math.exp((cur - ns)/temp)){
         cur = ns;
         if (cur < bestS){ bestS = cur; best = JSON.parse(JSON.stringify(plan)); }
@@ -589,10 +713,10 @@ function optimize(start){
   }
   return best;
 }
-function generate(){
-  S.plan = optimize(S.profile.startDate);
-  S.done = {};
-  save(); render();
+function generate(msg){
+  // Laisse l'écran afficher le message avant le calcul, qui peut prendre quelques secondes sur téléphone.
+  toast("Je prépare ta semaine…");
+  setTimeout(() => { S.plan = optimize(S.profile.startDate); S.done = {}; save(); render(); toast(msg || "Semaine prête"); }, 60);
 }
 function swapMeal(di, mi){
   const plan = S.plan, cur = plan.days[di].meals[mi], tried = plan.days[di].tried || (plan.days[di].tried = {});
@@ -623,7 +747,12 @@ const DISH = {curry:["🍛",28],bowlpates:["🥦",140],chili:["🌶️",4],bolo:
   sardinespates:["🍝",210],foies:["🧅",30],poiscasses:["🥣",95],cassoulet:["🫘",22],boulgour:["🍆",280],taboule:["🥙",85],grecque:["🥒",110],omelettechamp:["🍄",30],
   shakshuka:["🍳",6],gratinjambon:["🧀",46],pizzawrap:["🍕",12],potatoes:["🍟",42],hachis:["🥘",28],boulettes:["🧆",16],kefta:["🌯",26],tikka:["🍗",20],
   pouletchamp:["🍄",35],fajitas:["🌮",14],basquaise:["🫑",4],dindecreme:["🫛",100],dindewok:["🥡",160],nicoise:["🥗",130],dahlpc:["🍲",50],croque:["🥪",40],
-  pancakes:["🥞",38],porridgecacao:["🍫",25],overnight:["🍎",0]};
+  pancakes:["🥞",38],porridgecacao:["🍫",25],overnight:["🍎",0],
+  gnocchitomate:["🍅",10],gnocchidinde:["🥟",90],patdoucepoulet:["🍠",25],crevettescoco:["🦐",15],crevetteswok:["🍜",30],tofubroco:["🥦",120],tofucurry:["🍛",60],
+  skyrbowl:["🫐",250],cottagetoast:["🍞",40],carbonara:["🥓",35],tartiflette:["🧀",48],veloutebutternut:["🎃",28],risotto:["🍚",42],paella:["🥘",22],chilipoulet:["🌶️",8],
+  quesadillas:["🌮",36],teriyaki:["🍱",200],dindepatdouce:["🍠",18],steakpatdouce:["🥩",14],lasagnes:["🍝",6],courgettesfarcies:["🥒",100],porcsoja:["🥢",15],
+  porcpatdouce:["🥕",26],fishchips:["🐟",210],colincoco:["🥥",170],poke:["🍣",190],tartinessardines:["🥖",40],frittata:["🍳",90],oeufscocotte:["🥚",52],
+  dahlpoulet:["🍲",38],salade_hblancs:["🥗",110],houmous:["🫓",44],crepes:["🥞",330]};
 const dish = (rid, big) => { const [e, h] = DISH[rid] || ["🍽️", 20]; return `<div class="dish${big ? " big" : ""}" style="--dh:hsl(${h} 85% 55%)" aria-hidden="true">${e}</div>`; };
 const ICON = {
   check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
@@ -704,7 +833,7 @@ function recap(){
   S.plan.days.forEach(d => {
     if (d.date > TODAY) return;
     const e = eatenOf(d.date); due += 2; eaten += (e[0]?1:0) + (e[1]?1:0);
-    if (e[0] || e[1]){ daysWithP++; d.meals.forEach((rid, mi) => { if (e[mi]) P += solveMeal(REC_BY[rid], d.t).m.P; }); }
+    if (e[0] || e[1]){ daysWithP++; d.meals.forEach((rid, mi) => { if (e[mi]) P += mealMacros(d, mi).P; }); }
   });
   const W = sortedW(), end = addDays(S.plan.start, 6);
   const before = [...W].reverse().find(w => w.d < S.plan.start) || W.find(w => w.d >= S.plan.start);
@@ -722,28 +851,38 @@ function recapHTML(r, title){
 }
 
 /* ---------- Écran Aujourd'hui ---------- */
+const swapOf = (date, mi) => (S.swaps[date] || {})[mi] || null;
+function mealMacros(d, mi){ const sw = swapOf(d.date, mi); return sw || solveMeal(REC_BY[d.meals[mi]], d.t).m; }
+const extraCost = () => S.plan ? S.plan.days.reduce((a, d) => a + [0,1].reduce((b, mi) => b + (swapOf(d.date, mi) ? swapOf(d.date, mi).cost : 0), 0), 0) : 0;
 function mealCard(d, di, mi){
-  const rid = d.meals[mi], r = REC_BY[rid], s = solveMeal(r, d.t), on = eatenOf(d.date)[mi];
+  const rid = d.meals[mi], r = REC_BY[rid], s = solveMeal(r, d.t), on = eatenOf(d.date)[mi], sw = swapOf(d.date, mi);
+  if (sw) return `<div class="mealcard">
+    <div class="meal eaten swapped"><div class="dish" style="--dh:hsl(0 0% 60%)" aria-hidden="true">🔄</div>
+      <div><div class="slot">${mi ? "Soir" : "Midi"} · mangé à la place</div><div class="mtitle">${sw.name.replace(/</g, "&lt;")}</div>
+      <div class="mmeta"><span>${n0(sw.kcal)} kcal</span><span>${n0(sw.P)} g prot.</span><span class="price">${eur(sw.cost)}</span></div></div></div>
+    <div class="row"><button data-act="other-undo" data-date="${d.date}" data-mi="${mi}">Annuler</button><button data-act="other-open" data-date="${d.date}" data-mi="${mi}" data-di="${di}">Modifier</button></div></div>`;
   return `<div class="mealcard">
     <button class="meal ${on ? "eaten" : ""}" data-act="open" data-di="${di}" data-mi="${mi}">${dish(rid)}
       <div><div class="slot">${mi ? "Soir" : "Midi"}</div><div class="mtitle">${r.n}</div>
       <div class="mmeta"><span>${n0(s.m.kcal)} kcal</span><span>${n0(s.m.P)} g prot.</span><span class="price">${eur(s.m.cost)}</span>${stars(rid)}</div></div></button>
     <div class="row"><button class="eat ${on ? "on" : ""}" data-act="eat" data-date="${d.date}" data-mi="${mi}">${ICON.check}${on ? "Mangé" : "Marquer mangé"}</button>
-      <button data-act="cook" data-di="${di}" data-mi="${mi}">${ICON.pan}Cuisiner</button></div></div>`;
+      <button data-act="cook" data-di="${di}" data-mi="${mi}">${ICON.pan}Cuisiner</button>
+      <button data-act="other-open" data-date="${d.date}" data-mi="${mi}" data-di="${di}">${ICON.swap}Autre chose</button></div></div>`;
 }
 function renderToday(){
   const el = $("#v-today"), t = typeOf(TODAY), N = needs(), T = N.types[t], d = planDay(TODAY), di = S.plan ? S.plan.days.indexOf(d) : -1;
-  const pos = ((diffDays(TODAY, S.profile.cycleStart) % 3) + 3) % 3;
+  const pos = t;
   let eatK = 0, eatP = 0;
-  if (d) d.meals.forEach((rid, mi) => { if (eatenOf(TODAY)[mi]){ const m = solveMeal(REC_BY[rid], d.t).m; eatK += m.kcal; eatP += m.P; } });
+  if (d) d.meals.forEach((rid, mi) => { if (eatenOf(TODAY)[mi]){ const m = mealMacros(d, mi); eatK += m.kcal; eatP += m.P; } });
   const pk = eatK/T.kcal, pp = eatP/T.P;
-  const bw = budgetWeek(), cost = S.plan ? shopping(aggregate(S.plan)).cost : 0, over = cost > bw + 0.005;
+  const bw = budgetWeek(), extra = extraCost(), cost = (S.plan ? shopping(aggregate(S.plan)).cost : 0) + extra, over = cost > bw + 0.005;
   const st = streak();
   el.innerHTML = `
     <div class="hero ${TYPES[t].c}">
       <div class="kicker cap">${fmtDay(TODAY)}</div>
       <div class="session">${TYPES[t].n}</div>
       <div class="sub">${TYPES[t].sub} · ${n0(T.kcal)} kcal · ${T.P} g de protéines</div>
+      <div><button class="ghost" style="min-height:34px;padding:6px 12px;font-size:.85rem" data-act="shift-open">Séance décalée ? Recaler</button></div>
       <div class="cycle" aria-label="Jour ${pos+1} sur 3 du cycle">${[0,1,2].map(i => `<span class="${i <= pos ? "on" : ""}"></span>`).join("")}</div>
     </div>
     <div class="card"><div class="rings">${ringSVG(pk, pp)}
@@ -757,7 +896,7 @@ function renderToday(){
     <div class="grid2">
       <div class="card tight"><div class="label">Budget semaine</div><div class="big">${eur(Math.max(0, bw - cost))}<br><small>restants sur ${eur(bw)}</small></div>
         <div class="gauge ${over ? "over" : ""}"><i style="width:${Math.min(100, cost/bw*100)}%"></i></div>
-        <div class="small ${over ? "" : "muted"}" style="${over ? "color:var(--bad)" : ""}">${over ? `Dépassé de ${eur(cost - bw)}` : `Courses : ${eur(cost)}`}</div></div>
+        <div class="small ${over ? "" : "muted"}" style="${over ? "color:var(--bad)" : ""}">${over ? `Dépassé de ${eur(cost - bw)}` : `Courses : ${eur(cost - extra)}`}${extra ? ` · hors plan : ${eur(extra)}` : ""}</div></div>
       <div class="card tight"><div class="label">Série</div><div class="big" style="color:${st ? "var(--accent-2)" : "var(--ink)"}">${st}<br><small>jour${st > 1 ? "s" : ""} d'affilée</small></div>
         <div class="small muted">Record : ${S.bestStreak || 0} jour${(S.bestStreak || 0) > 1 ? "s" : ""}</div></div>
     </div>
@@ -768,7 +907,7 @@ function renderToday(){
 /* ---------- Écran Semaine ---------- */
 function renderSemaine(){
   const el = $("#v-semaine");
-  if (!S.plan){ el.innerHTML = `<div class="card"><h3>Aucune recette disponible</h3><p class="muted">Tes exclusions retirent toutes les recettes d'un créneau. Retire-en dans « Profil ».</p></div>`; return; }
+  if (!S.plan){ el.innerHTML = `<div class="card"><h3>Pas encore de menus</h3><p class="muted">Ta semaine se prépare. Si rien n'apparaît, tes exclusions retirent peut-être toutes les recettes d'un créneau : regarde dans « Profil ».</p></div>`; return; }
   const N = needs(), p = S.plan, cost = shopping(aggregate(p)).cost, bw = budgetWeek();
   el.innerHTML = `<div class="row between"><div><div class="label">Semaine du ${dayShort(p.start)} au ${dayShort(addDays(p.start,6))}</div><h2>Ton plan</h2></div>
       <div class="row"><button data-act="regen">${ICON.swap}Autre semaine</button><button data-act="next">Suivante</button></div></div>
@@ -783,7 +922,7 @@ function renderSemaine(){
         </div>
         ${d.meals.map((rid, mi) => { const s = solveMeal(REC_BY[rid], d.t);
           return `<button class="meal ${e[mi] ? "eaten" : ""}" data-act="open" data-di="${di}" data-mi="${mi}">${dish(rid)}
-            <div><div class="slot">${mi ? "Soir" : "Midi"}${e[mi] ? " · mangé" : ""}</div><div class="mtitle">${REC_BY[rid].n}</div>
+            <div><div class="slot">${mi ? "Soir" : "Midi"}${swapOf(d.date, mi) ? ` · remplacé par ${swapOf(d.date, mi).name.replace(/</g, "&lt;")}` : e[mi] ? " · mangé" : ""}</div><div class="mtitle">${REC_BY[rid].n}</div>
             <div class="mmeta"><span>${n0(s.m.kcal)} kcal</span><span>${n0(s.m.P)} g prot.</span><span class="price">${eur(s.m.cost)}</span>${stars(rid)}</div></div></button>`; }).join("")}
       </div>`; }).join("")}`;
 }
@@ -1008,9 +1147,9 @@ document.addEventListener("click", e => {
     case "rate": { const rid = a.dataset.rid, n = +a.dataset.n; S.ratings[rid] = S.ratings[rid] === n ? 0 : n; if (!S.ratings[rid]) delete S.ratings[rid]; save(); render(); break; }
     case "unexcl": S.excl = S.excl.filter(x => x !== a.dataset.id); cache = {}; save(); render(); break;
     case "unexclr": S.exclR = S.exclR.filter(x => x !== a.dataset.id); cache = {}; save(); render(); break;
-    case "regen": generate(); toast("Nouvelle semaine générée"); break;
-    case "next": S.profile.startDate = addDays(S.plan ? S.plan.start : S.profile.startDate, 7); generate(); toast("Semaine suivante prête"); break;
-    case "gen-today": S.profile.startDate = TODAY; generate(); toast("Semaine générée"); break;
+    case "regen": generate("Nouvelle semaine générée"); break;
+    case "next": S.profile.startDate = addDays(S.plan ? S.plan.start : S.profile.startDate, 7); generate("Semaine suivante prête"); break;
+    case "gen-today": S.profile.startDate = TODAY; generate("Semaine générée"); break;
     case "got": S.done[a.dataset.id] = !S.done[a.dataset.id]; save(); render(); break;
     case "owned": { const id = a.dataset.id; S.owned = a.checked ? [...new Set([...S.owned, id])] : S.owned.filter(x => x !== id); save(); render(); break; }
     case "copy": { const sh = shopping(aggregate(S.plan));
@@ -1022,7 +1161,7 @@ document.addEventListener("click", e => {
     case "clear-placard": S.placard = {}; save(); render(); break;
     case "reset-prices": S.prices = {}; save(); render(); toast("Prix estimés rétablis"); break;
     case "delw": S.weights = S.weights.filter(w => w.d !== a.dataset.d); cache = {}; save(); render(); break;
-    case "adj": S.adj = a.dataset.n === "reset" ? 0 : S.adj + Number(a.dataset.n); generate(); toast("Calories ajustées, menus régénérés"); break;
+    case "adj": S.adj = a.dataset.n === "reset" ? 0 : S.adj + Number(a.dataset.n); generate("Calories ajustées, menus régénérés"); break;
   }
 });
 document.addEventListener("keydown", e => {
@@ -1046,9 +1185,170 @@ document.addEventListener("submit", e => {
     p.sexe = $("#p-sexe").value; p.activite = num("activite");
     ["age","taille","deficit","prot","lip","budgetMois","objectif"].forEach(k => { const v = num(k); if (!isNaN(v)) p[k] = v; });
     p.cycleStart = $("#p-cycleStart").value || p.cycleStart; p.startDate = $("#p-startDate").value || p.startDate;
-    generate(); toast("Profil enregistré, menus régénérés");
+    generate("Profil enregistré, menus régénérés");
   }
 });
+
+/* ---------- Galerie de thèmes ---------- */
+const SKINS = [
+  {id:"sport", n:"Sport", d:"Noir et orange, condensé", c:["#0D0E11","#FF6B2C","#43B8FF","#F3F4F6"], meta:"#0D0E11"},
+  {id:"neon", n:"Néon", d:"Violet nuit et rose fluo", c:["#0B0820","#FF2BD6","#22E1FF","#F4F0FF"], meta:"#0B0820", f:"Orbitron:wght@600;800&family=Exo+2:wght@400;500;600;700"},
+  {id:"ocean", n:"Océan", d:"Bleu profond et turquoise", c:["#07141F","#19C3B5","#5AA9FF","#E6F4FF"], meta:"#07141F", f:"Archivo:wght@400;500;600;700;800"},
+  {id:"foret", n:"Forêt", d:"Vert sombre et ambre", c:["#0E1410","#E9A23B","#7CC4A0","#EEF3EA"], meta:"#0E1410", f:"Oswald:wght@500;700&family=Source+Sans+3:wght@400;500;600;700"},
+  {id:"arcade", n:"Arcade", d:"Rétro pixel, jaune vif", c:["#111111","#FFD400","#00E5FF","#F5F1DC"], meta:"#111111", f:"Silkscreen:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600;700"},
+  {id:"frais", n:"Frais", d:"Clair, vert et arrondi", c:["#F2F6F0","#1E9A52","#2F7DD1","#16241A"], meta:"#F2F6F0", f:"Nunito:wght@400;600;700;800;900"},
+  {id:"papier", n:"Papier", d:"Clair, noir et élégant", c:["#F7F6F1","#121212","#3B5BDB","#121212"], meta:"#F7F6F1", f:"DM+Serif+Display&family=DM+Sans:wght@400;500;600;700"},
+  {id:"fraise", n:"Fraise", d:"Clair, rose et tout rond", c:["#FFF4F6","#E8336D","#7B61FF","#3A1420"], meta:"#FFF4F6", f:"Baloo+2:wght@500;700;800&family=Quicksand:wght@400;500;600;700"},
+];
+function applySkin(id){
+  const sk = SKINS.find(x => x.id === id) || SKINS[0], root = document.documentElement;
+  if (sk.id === "sport") root.removeAttribute("data-skin"); else root.setAttribute("data-skin", sk.id);
+  if (sk.f && !document.getElementById("font-" + sk.id)){
+    const l = document.createElement("link"); l.rel = "stylesheet"; l.id = "font-" + sk.id;
+    l.href = `https://fonts.googleapis.com/css2?family=${sk.f}&display=swap`; document.head.appendChild(l);
+  }
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = sk.meta;
+}
+applySkin(S.skin);
+function skinsCard(){
+  return `<div class="card"><div class="row between"><h3>Thèmes</h3><span class="label">${SKINS.length} thèmes</span></div>
+    <p class="small muted">Change toute l'apparence de l'appli. Tes données et les fonctions restent les mêmes.</p>
+    <div class="skins">${SKINS.map(k => `<button class="skin ${S.skin === k.id ? "on" : ""}" data-act="skin" data-id="${k.id}" aria-pressed="${S.skin === k.id}">
+      <div class="mock" style="background:${k.c[0]};color:${k.c[3]};box-shadow:inset 0 0 0 1px ${k.c[3]}22"><b style="color:${k.c[1]}">Leg Day</b>
+        <div style="display:flex;gap:6px"><i style="flex:2;background:${k.c[1]}"></i><i style="flex:1;background:${k.c[2]}"></i></div></div>
+      <span class="nm">${k.n}${S.skin === k.id ? " ✓" : ""}</span><span class="ds">${k.d}</span></button>`).join("")}</div></div>`;
+}
+
+/* ---------- Recaler une séance ---------- */
+const skipsRecent = () => S.shifts.filter(x => diffDays(TODAY, x.d) < 14 && diffDays(TODAY, x.d) >= 0 && x.from !== 2 && x.to === 2);
+const PEP = [
+  "La motivation vient en bougeant, pas avant. Promets-toi juste l'échauffement : le reste suit presque toujours.",
+  "Une séance de 30 minutes vaut mieux qu'une séance parfaite reportée. Fais court, mais fais-la.",
+  "Ta sèche se joue sur la régularité, pas sur une semaine parfaite. Reprends le fil dès la prochaine séance.",
+  "Prépare ton sac ce soir et fixe une heure précise demain. Ce qui est planifié se fait.",
+];
+function shiftToday(x){
+  const prev = S.shifts.find(s => s.d === TODAY), from = prev ? prev.from : typeOf(TODAY);
+  S.shifts = S.shifts.filter(s => s.d !== TODAY);
+  S.profile.cycleStart = addDays(TODAY, -x); // demain enchaîne sur la séance suivante du cycle
+  S.dayType[TODAY] = x;
+  if (x !== from) S.shifts.push({d:TODAY, from, to:x});
+  if (S.plan) S.plan.days.forEach(d => { if (d.date >= TODAY) d.t = typeOf(d.date); });
+  cache = {}; SHEET = null; save(); render();
+  const n = skipsRecent().length;
+  toast(n >= 3 ? `${n} séances reportées en 2 semaines. On se reprend !` : `Recalé : ${TYPES[x].n} aujourd'hui, ${TYPES[(x+1)%3].n} demain. Les repas suivent.`);
+}
+function shiftSheet(){
+  const t = typeOf(TODAY), prev = S.shifts.find(s => s.d === TODAY), orig = prev ? prev.from : t, n = skipsRecent().length;
+  return `<div class="grab"></div><h2>Recaler la séance</h2>
+    <p class="muted">Qu'est-ce que tu fais aujourd'hui ? Le cycle repart de là : les jours suivants et leurs repas s'adaptent.</p>
+    <div class="typepick">${TYPES.map((T, i) => `<button class="${T.c} ${i === t ? "on" : ""}" data-act="shift" data-x="${i}">${T.n}${i === orig ? `<span class="small muted">prévu</span>` : ""}</button>`).join("")}</div>
+    <p class="small muted">Avec ${TYPES[t].n} aujourd'hui, demain ce sera ${TYPES[(t+1)%3].n}, puis ${TYPES[(t+2)%3].n}.</p>
+    <p class="small ${n >= 3 ? "" : "muted"}" style="${n >= 3 ? "color:var(--warn)" : ""}">Séances reportées ces 14 derniers jours : ${n}.</p>
+    <button class="ghost" data-act="close">Fermer</button>`;
+}
+
+/* ---------- J'ai mangé autre chose ---------- */
+// Portions types : kcal, protéines, glucides, lipides, prix estimé (€).
+const FOODS = [
+  ["Resto & fast-food","Kebab frites",1100,45,110,50,8.5],["Resto & fast-food","Kebab sans frites",750,40,65,35,7],
+  ["Resto & fast-food","Menu burger (burger + frites)",1000,35,110,45,10.5],["Resto & fast-food","Burger seul",550,26,45,29,5.5],
+  ["Resto & fast-food","Cheeseburger",300,15,32,12,2],["Resto & fast-food","Nuggets (9 pièces)",430,24,26,25,5.5],
+  ["Resto & fast-food","Pizza entière",1800,75,200,70,12],["Resto & fast-food","Demi-pizza",900,38,100,35,6],
+  ["Resto & fast-food","Tacos français (M)",1300,50,120,65,9],["Resto & fast-food","Burrito",900,40,110,30,10],
+  ["Resto & fast-food","Sushis (12 pièces)",520,22,85,9,12],["Resto & fast-food","Poke bowl saumon",650,30,75,22,12.5],
+  ["Resto & fast-food","Plat chinois (riz cantonais + poulet)",850,35,110,28,9],["Resto & fast-food","Salade César",550,32,25,35,11],
+  ["Resto & fast-food","Steak frites",900,45,70,45,15],["Resto & fast-food","Couscous royal",1000,55,100,40,16],
+  ["Resto & fast-food","Pâtes carbonara (resto)",900,32,95,42,13],["Resto & fast-food","Repas au resto U",700,30,85,25,3.3],
+  ["Boulangerie & snacks","Sandwich jambon-beurre",450,20,50,18,3.5],["Boulangerie & snacks","Sandwich poulet crudités",480,28,52,16,4.5],
+  ["Boulangerie & snacks","Panini",600,28,60,26,4.5],["Boulangerie & snacks","Croque-monsieur",500,25,40,26,4.5],
+  ["Boulangerie & snacks","Quiche lorraine (part)",450,15,28,31,3.5],["Boulangerie & snacks","Formule boulangerie",1000,30,140,35,8.5],
+  ["Boulangerie & snacks","Wrap poulet",450,25,45,18,4.5],["Boulangerie & snacks","Pain au chocolat",280,5,30,15,1.2],
+  ["Boulangerie & snacks","Barre protéinée",200,20,18,7,1.5],["Boulangerie & snacks","Shaker protéiné au lait",250,30,15,6,1.2],
+  ["Boulangerie & snacks","Bol de céréales au lait",350,11,60,7,0.6],["Boulangerie & snacks","Glace (2 boules)",300,5,38,14,3.5],
+  ["Maison & soirées","Pâtes bolognaise (assiette)",750,35,95,22,2.5],["Maison & soirées","Omelette 3 œufs + pain",450,24,30,24,1.2],
+  ["Maison & soirées","Raclette",1300,55,80,85,8],["Maison & soirées","Barbecue (2 saucisses, chips, pain)",1100,35,80,70,4],
+  ["Maison & soirées","Bière (50 cl)",210,2,18,0,3.5],["Maison & soirées","Soda (33 cl)",140,0,35,0,1],
+].map(([grp, n, k, p, g, l, c]) => ({grp, n, k, p, g, l, c}));
+function otherSheet(){
+  const {date, mi} = SHEET, d = planDay(date), sw = swapOf(date, mi);
+  const groups = [...new Set(FOODS.map(f => f.grp))];
+  return `<div class="grab"></div><h2>J'ai mangé autre chose</h2>
+    <p class="muted">À la place de : ${d ? REC_BY[d.meals[mi]].n : "ce repas"} (${mi ? "soir" : "midi"}). Choisis le plat, l'appli calcule les macros et le coût.</p>
+    <label class="form" style="grid-template-columns:1fr"><span class="label">Plat</span>
+      <select id="o-food">${groups.map(gp => `<optgroup label="${gp}">${FOODS.map((f, i) => f.grp === gp ? `<option value="${i}">${f.n}</option>` : "").join("")}</optgroup>`).join("")}
+        <optgroup label="Un aliment, au poids">${Object.keys(ING).sort((a, b) => ING[a].n.localeCompare(ING[b].n, "fr")).map(id => `<option value="ing:${id}">${ING[id].n}</option>`).join("")}</optgroup>
+        <option value="free">Autre chose (je saisis moi-même)</option></select></label>
+    <div id="o-mult-wrap" class="form"><label>Quantité<select id="o-mult"><option value="0.5">Une demi-portion</option><option value="1" selected>Une portion</option><option value="1.5">Une portion et demie</option><option value="2">Deux portions</option></select></label></div>
+    <div id="o-g-wrap" class="form" hidden><label>Quantité (g)<input type="number" id="o-g" min="0" step="10" value="150"></label></div>
+    <div id="o-free" class="form" hidden>
+      <label>Nom<input type="text" id="o-name" placeholder="Ex. : assiette chez mamie"></label><label>Calories<input type="number" id="o-k" min="0" value="800"></label>
+      <label>Protéines (g)<input type="number" id="o-p" min="0" value="35"></label><label>Glucides (g)<input type="number" id="o-gl" min="0" value="80"></label>
+      <label>Lipides (g)<input type="number" id="o-l" min="0" value="30"></label><label>Prix (€)<input type="number" id="o-c" min="0" step="0.1" value="0"></label></div>
+    <div class="preview" id="o-prev"></div>
+    <p class="small muted">Les prix des plats sont des estimations moyennes, modifiables avec « Autre chose (je saisis moi-même) ». Le coût compte dans ton budget de la semaine.</p>
+    <button class="primary" data-act="other-save">${sw ? "Mettre à jour" : "Enregistrer à la place du repas prévu"}</button>
+    <button class="ghost" data-act="close">Annuler</button>`;
+}
+function otherCalc(){
+  const v = $("#o-food").value;
+  if (v === "free") return {name: $("#o-name").value.trim() || "Repas libre", kcal: +$("#o-k").value || 0, P: +$("#o-p").value || 0, G: +$("#o-gl").value || 0, L: +$("#o-l").value || 0, cost: +$("#o-c").value || 0};
+  if (v.startsWith("ing:")){ const id = v.slice(4), g = Math.max(0, +$("#o-g").value || 0), i = ing(id);
+    return {name: `${i.n} (${n0(g)} g)`, kcal: g*i.k/100, P: g*i.p/100, G: g*i.g/100, L: g*i.l/100, cost: g/i.pk*i.px}; }
+  const f = FOODS[+v], m = +$("#o-mult").value;
+  return {name: f.n + (m !== 1 ? ` × ${String(m).replace(".", ",")}` : ""), kcal: f.k*m, P: f.p*m, G: f.g*m, L: f.l*m, cost: f.c*m};
+}
+function otherUI(){
+  if (!$("#o-food")) return;
+  const v = $("#o-food").value;
+  $("#o-mult-wrap").hidden = v === "free" || v.startsWith("ing:"); $("#o-g-wrap").hidden = !v.startsWith("ing:"); $("#o-free").hidden = v !== "free";
+  const c = otherCalc();
+  $("#o-prev").innerHTML = `<div><span class="label">kcal</span><b>${n0(c.kcal)}</b></div><div><span class="label">Prot.</span><b>${n0(c.P)} g</b></div><div><span class="label">Gluc.</span><b>${n0(c.G)} g</b></div><div><span class="label">Coût</span><b class="price">${eur(c.cost)}</b></div>`;
+}
+
+/* ---------- Raccords avec l'affichage ---------- */
+const _renderSheetF = renderSheet;
+renderSheet = function(){
+  if (!SHEET || !SHEET.mode) return _renderSheetF();
+  $("#sheet-body").innerHTML = SHEET.mode === "shift" ? shiftSheet() : otherSheet();
+  $("#sheet").hidden = false;
+  if (SHEET.mode === "other"){
+    const sw = swapOf(SHEET.date, SHEET.mi);
+    if (sw && sw.src){ $("#o-food").value = sw.src.v; if (sw.src.m) $("#o-mult").value = sw.src.m; if (sw.src.g) $("#o-g").value = sw.src.g; }
+    otherUI();
+  }
+};
+const _renderProfilF = renderProfil;
+renderProfil = function(){ _renderProfilF(); $("#v-profil > h2").insertAdjacentHTML("afterend", skinsCard()); };
+const _renderTodayF = renderToday;
+renderToday = function(){
+  _renderTodayF();
+  const n = skipsRecent().length;
+  if (n >= 3){
+    const next = [1,2,3].map(k => addDays(TODAY, k)).find(dt => typeOf(dt) !== 2), nt = next ? typeOf(next) : 0;
+    $("#v-today .hero").insertAdjacentHTML("afterend", `<div class="card tight alert"><h3>${n} séances reportées en 2 semaines</h3>
+      <p>${PEP[n % PEP.length]}</p><p class="small muted">Prochaine séance : <b style="color:var(--ink)">${TYPES[nt].n}</b> ${next ? (diffDays(next, TODAY) === 1 ? "demain" : fmtDay(next)) : ""}. Tes repas sont déjà calés dessus.</p></div>`);
+  }
+};
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-act]"); if (!a) return;
+  switch (a.dataset.act){
+    case "skin": S.skin = a.dataset.id; applySkin(S.skin); save(); render(); toast(`Thème ${SKINS.find(k => k.id === S.skin).n}`); break;
+    case "shift-open": SHEET = {mode:"shift"}; renderSheet(); break;
+    case "shift": shiftToday(+a.dataset.x); break;
+    case "other-open": SHEET = {mode:"other", date:a.dataset.date, mi:+a.dataset.mi}; renderSheet(); break;
+    case "other-save": {
+      const c = otherCalc(), v = $("#o-food").value, {date, mi} = SHEET;
+      c.src = {v, m: $("#o-mult").value, g: $("#o-g").value};
+      (S.swaps[date] = S.swaps[date] || {})[mi] = c;
+      const ev = [...eatenOf(date)]; ev[mi] = true; S.eaten[date] = ev;
+      SHEET = null; save(); render(); toast(`${c.name} : ${n0(c.kcal)} kcal, ${n0(c.P)} g de protéines`); break; }
+    case "other-undo": { const {date, mi} = a.dataset; if (S.swaps[date]) delete S.swaps[date][mi];
+      const ev = [...eatenOf(date)]; ev[+mi] = false; S.eaten[date] = ev; save(); render(); toast("Remplacement annulé"); break; }
+  }
+});
+document.addEventListener("input", e => { if (e.target.id && e.target.id.startsWith("o-")) otherUI(); });
+document.addEventListener("change", e => { if (e.target.id && e.target.id.startsWith("o-")) otherUI(); });
 
 /* ---------- Appli installable : installation, rappels, sauvegarde ---------- */
 let installEvt = null;
@@ -1083,17 +1383,17 @@ function exportData(){
   S.lastBackup = TODAY; save();
   const a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob([JSON.stringify(S, null, 1)], {type:"application/json"}));
-  a.download = `seche-drive-sauvegarde-${TODAY}.json`; document.body.appendChild(a); a.click(); a.remove();
+  a.download = `shredly-sauvegarde-${TODAY}.json`; document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 3000); render(); toast("Sauvegarde téléchargée");
 }
 function importData(txt){
   let o; try { o = JSON.parse(txt); } catch(e) { toast("Données illisibles"); return false; }
-  if (!o || typeof o !== "object" || !o.profile || !Array.isArray(o.weights)){ toast("Ce n'est pas une sauvegarde Sèche & Drive"); return false; }
+  if (!o || typeof o !== "object" || !o.profile || !Array.isArray(o.weights)){ toast("Ce n'est pas une sauvegarde Shredly"); return false; }
   S = o;
   for (const k in DEF) if (S[k] === undefined) S[k] = JSON.parse(JSON.stringify(DEF[k]));
   for (const k in DEF.profile) if (S.profile[k] === undefined) S.profile[k] = DEF.profile[k];
   if (S.weighDay === undefined) S.weighDay = 1;
-  cache = {}; save(); if (!S.plan) generate(); else render(); toast("Données restaurées"); return true;
+  cache = {}; save(); if (!S.plan) generate("Données restaurées"); else { render(); toast("Données restaurées"); } return true;
 }
 const JOURS = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
 function appCard(){
@@ -1143,7 +1443,8 @@ document.addEventListener("change", e => {
   if (e.target.id === "backup-file" && e.target.files[0]){ const f = e.target.files[0]; f.text().then(importData); e.target.value = ""; }
 });
 /* ---------- Import des prix réels (ticket, récap de commande, page du Drive) ---------- */
-const KW = {porc:["porc","longe"],colin:["colin","lieu"],foie:["foie"],sardines:["sardine"],hblancs:["haricot blanc","haricots blancs","lingot"],pcasses:["pois casse"],
+const KW = {gnocchi:["gnocchi"],patdouce:["patate douce","patates douces"],butternut:["butternut","courge"],skyr:["skyr"],cottage:["cottage"],lardons:["lardon"],
+  crevettes:["crevette"],tofu:["tofu"],coco:["coco"],fruitsr:["fruits rouges","fruit rouge"],porc:["porc","longe"],colin:["colin","lieu"],foie:["foie"],sardines:["sardine"],hblancs:["haricot blanc","haricots blancs","lingot"],pcasses:["pois casse"],
   boulgour:["boulgour"],champignons:["champignon"],poivrons:["poivron"],creme:["creme"],mozza:["mozzarella"],feta:["feta"],chouf:["chou fleur","chou-fleur"],
   wok:["wok"],ratatouille:["ratatouille"],concombre:["concombre"],tomatesf:["tomate"],cacao:["cacao"],riz:["riz"],pates:["pates","penne","coquillette","spaghetti","fusilli","macaroni"],semoule:["semoule"],avoine:["avoine"],
   lcorail:["lentille corail","lentilles corail","corail"],lentilles:["lentille","lentilles"],pchiches:["pois chiche"],hrouges:["haricot rouge","haricots rouges"],
@@ -1247,7 +1548,7 @@ $("#imp-review").addEventListener("click", e => {
   }
 });
 
-if (!S.plan) generate(); else render();
+render(); if (!S.plan) generate();
 </script>
 
 </body>

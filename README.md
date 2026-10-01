@@ -1,4 +1,4 @@
-# Sèche & Drive
+# Shredly
 
 Appli de sèche pour Android : menus calés sur le cycle Leg Day / Haut du corps / Repos, budget de 200 € par mois, liste de courses Leclerc Drive Saint-Paul-lès-Dax, suivi du poids.
 

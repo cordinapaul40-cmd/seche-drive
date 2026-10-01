@@ -1,5 +1,5 @@
-/* Service worker de Sèche & Drive : fonctionnement hors ligne et rappels quotidiens. */
-const V = "seche-shell-v1";
+/* Service worker de Shredly : fonctionnement hors ligne et rappels quotidiens. */
+const V = "seche-shell-v2";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/maskable-512.png"];
 const KEEP = [V, "seche-runtime", "seche-settings"];
 
@@ -37,7 +37,7 @@ async function remind(){
   if (!r) return;
   const s = await r.json(), now = new Date(), today = localDay(now);
   if (!s.on || s.lastShown === today) return;
-  let title = "Sèche & Drive", body = "Pense à cocher tes repas du jour pour garder ta série.";
+  let title = "Shredly", body = "Pense à cocher tes repas du jour pour garder ta série.";
   if (now.getDay() === s.weighDay && s.lastW !== today){ title = "Jour de pesée"; body = "Pèse-toi à jeun ce matin et note ton poids."; }
   else if (s.doneToday === today) return;
   await self.registration.showNotification(title, {body, icon:"icons/icon-192.png", badge:"icons/icon-192.png", tag:"rappel", lang:"fr"});
