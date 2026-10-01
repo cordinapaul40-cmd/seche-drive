@@ -293,6 +293,24 @@ const ING = {
   pommes:{n:"Pommes",r:"Fruits & légumes",pk:1500,pl:"sachet 1,5 kg",px:2.75,k:52,p:0.3,g:12,l:0.2},
   pain:{n:"Pain de mie complet",r:"Pain & viennoiserie",pk:500,pl:"paquet 500 g",px:1.45,k:250,p:9,g:43,l:4},
   tortillas:{n:"Tortillas de blé",r:"Pain & viennoiserie",pk:320,pl:"paquet de 8",px:1.55,k:300,p:8,g:50,l:7,u:40,un:"wrap",ud:40},
+  porc:{n:"Longe de porc (rôti)",r:"Boucherie & charcuterie",pk:1000,pl:"rôti 1 kg",px:7.90,k:135,p:22,g:0,l:5},
+  foie:{n:"Foies de volaille",r:"Boucherie & charcuterie",pk:500,pl:"barquette 500 g",px:2.49,k:120,p:19,g:1,l:5},
+  colin:{n:"Filets de colin d'Alaska",r:"Surgelés",pk:1000,pl:"sachet 1 kg",px:6.95,k:75,p:17,g:0,l:0.8},
+  chouf:{n:"Chou-fleur",r:"Surgelés",pk:1000,pl:"sachet 1 kg",px:2.10,k:25,p:2,g:3,l:0.3},
+  poivrons:{n:"Poivrons en lanières",r:"Surgelés",pk:750,pl:"sachet 750 g",px:2.15,k:30,p:1,g:5,l:0.3},
+  wok:{n:"Légumes pour wok",r:"Surgelés",pk:1000,pl:"sachet 1 kg",px:2.40,k:40,p:2,g:5,l:0.8},
+  sardines:{n:"Sardines à l'huile",r:"Conserves",pk:95,pl:"boîte 135 g (95 g égouttés)",px:0.99,k:210,p:24,g:0,l:13,u:95,un:"boîte",ud:95},
+  hblancs:{n:"Haricots blancs (conserve)",r:"Conserves",pk:250,pl:"boîte 400 g (250 g égouttés)",px:0.75,k:100,p:7,g:13,l:0.5},
+  champignons:{n:"Champignons de Paris émincés",r:"Conserves",pk:230,pl:"boîte (230 g égouttés)",px:0.95,k:25,p:2.5,g:1,l:0.4},
+  ratatouille:{n:"Ratatouille cuisinée",r:"Conserves",pk:660,pl:"bocal 660 g",px:1.69,k:60,p:1.2,g:6,l:3.5},
+  pcasses:{n:"Pois cassés",r:"Épicerie salée",pk:500,pl:"sachet 500 g",px:1.50,k:340,p:23,g:50,l:1.5},
+  boulgour:{n:"Boulgour",r:"Épicerie salée",pk:500,pl:"sachet 500 g",px:1.65,k:350,p:12,g:70,l:1.5},
+  creme:{n:"Crème légère 15 %",r:"Crèmerie & œufs",pk:200,pl:"brique 20 cl",px:0.95,k:170,p:2.6,g:4,l:15},
+  mozza:{n:"Mozzarella",r:"Crèmerie & œufs",pk:125,pl:"boule 125 g",px:0.79,k:250,p:18,g:1,l:19},
+  feta:{n:"Feta",r:"Crèmerie & œufs",pk:200,pl:"bloc 200 g",px:1.95,k:260,p:17,g:1,l:21},
+  tomatesf:{n:"Tomates",r:"Fruits & légumes",pk:1000,pl:"1 kg",px:2.50,k:18,p:0.9,g:3,l:0.2},
+  concombre:{n:"Concombre",r:"Fruits & légumes",pk:400,pl:"pièce (≈ 400 g)",px:0.79,k:12,p:0.6,g:2,l:0.1},
+  cacao:{n:"Cacao en poudre non sucré",r:"Épicerie sucrée",pk:250,pl:"boîte 250 g",px:2.10,k:380,p:20,g:15,l:20,stock:1},
   huile:{n:"Huile de colza",r:"Épicerie salée",pk:920,pl:"bouteille 1 L",px:2.35,k:900,p:0,g:0,l:100,stock:1},
   epices:{n:"Épices (curry, paprika, cumin)",r:"Épicerie salée",pk:40,pl:"pot",px:1.30,k:300,p:12,g:40,l:10,stock:1},
   soja:{n:"Sauce soja",r:"Épicerie salée",pk:250,pl:"bouteille 25 cl",px:1.65,k:60,p:8,g:7,l:0,stock:1},
@@ -334,10 +352,80 @@ const REC = [
    ins:"Cuire les lentilles corail 15 min avec oignon, tomates et curry. Servir avec le riz et des œufs mollets."},
   {id:"four",n:"Poulet rôti, pommes de terre & carottes au four",s:[1,2],P:["poulet",120,320],G:["pdt",200,1000],F:[["carottes",150],["oignons",50],["huile",12],["epices",3]],
    ins:"Tout couper en morceaux, mélanger avec l'huile et le paprika, enfourner 35 min à 200 °C."},
-  {id:"porridge",n:"Porridge protéiné banane & cacahuète",s:[1],P:["fblanc",200,500],G:["avoine",60,200],F:[["bananes",120],["lait",200],["cacahuete",15]],
+  {id:"porridge",n:"Porridge protéiné banane & cacahuète",s:[1],P:["fblanc",200,650],G:["avoine",60,240],F:[["bananes",120],["lait",200],["cacahuete",15]],
    ins:"Cuire les flocons dans le lait 3 min, hors du feu ajouter le fromage blanc, la banane en rondelles et le beurre de cacahuète."},
   {id:"brunch",n:"Œufs brouillés, tartines & fromage blanc",s:[1],P:["oeufs",120,300],G:["pain",60,260],F:[["fblanc",200],["pommes",150]],
    ins:"Œufs brouillés à feu doux, tartines grillées. Fromage blanc et une pomme en dessert."},
+  {id:"porcwok",n:"Porc sauté au wok, nouilles & légumes",s:[1,2],P:["porc",120,320],G:["pates",50,260],F:[["wok",250],["soja",15],["huile",8]],
+   ins:"Couper le porc en fines lanières et le saisir à feu vif. Ajouter les légumes surgelés, puis les pâtes cuites et la sauce soja. Sauter 3 min."},
+  {id:"porcpuree",n:"Rôti de porc, purée & haricots verts",s:[1,2],P:["porc",120,320],G:["pdt",200,1000],F:[["hverts",200],["lait",60],["epices",2]],
+   ins:"Cuire le rôti 45 min à 180 °C (il se garde 3 jours, en tranches). Purée de pommes de terre au lait, haricots verts à la poêle."},
+  {id:"porcpaprika",n:"Sauté de porc au paprika, riz & poivrons",s:[1,2],P:["porc",120,320],G:["riz",50,260],F:[["poivrons",200],["oignons",50],["tomates",150],["epices",3],["huile",6]],
+   ins:"Faire dorer le porc en dés avec l'oignon, ajouter poivrons, tomates et paprika. Mijoter 20 min. Servir avec le riz."},
+  {id:"colinriz",n:"Colin, riz & brocolis",s:[1,2],P:["colin",150,450],G:["riz",50,260],F:[["brocolis",250],["huile",10],["epices",1]],
+   ins:"Cuire les filets de colin encore surgelés à la poêle couverte 10 min. Riz à l'eau, brocolis à la vapeur, un filet d'huile."},
+  {id:"colinprov",n:"Colin à la provençale & pommes de terre",s:[1,2],P:["colin",150,450],G:["pdt",200,1000],F:[["ratatouille",250],["huile",5]],
+   ins:"Pommes de terre vapeur 20 min. Réchauffer la ratatouille, y poser le colin et cuire à couvert 10 min."},
+  {id:"colincurry",n:"Curry de colin, riz & épinards",s:[1,2],P:["colin",150,450],G:["riz",50,260],F:[["epinards",200],["fblanc",60],["oignons",50],["epices",3],["huile",6]],
+   ins:"Faire revenir l'oignon avec le curry, ajouter épinards et colin en morceaux, cuire 10 min. Hors du feu, lier avec le fromage blanc."},
+  {id:"parmentiercolin",n:"Parmentier de colin aux épinards",s:[1,2],P:["colin",150,450],G:["pdt",200,1000],F:[["epinards",150],["lait",100],["emmental",30],["huile",8]],
+   ins:"Purée au lait. Dans un plat : colin émietté cuit, épinards, purée, emmental. Gratiner 15 min à 200 °C. Se garde 3 jours."},
+  {id:"colinsemoule",n:"Colin au cumin, semoule & carottes",s:[1,2],P:["colin",150,450],G:["semoule",50,260],F:[["carottes",200],["epices",3],["huile",8]],
+   ins:"Carottes en rondelles poêlées au cumin 15 min, ajouter le colin et couvrir 10 min. Semoule à l'eau bouillante."},
+  {id:"sardinespates",n:"Pâtes aux sardines & tomates",s:[1,2],P:["sardines",95,285],G:["pates",50,260],F:[["tomates",200],["oignons",50],["epices",1]],
+   ins:"Faire fondre l'oignon, ajouter les tomates 10 min puis les sardines émiettées. Mélanger aux pâtes."},
+  {id:"foies",n:"Foies de volaille aux oignons & purée",s:[1,2],P:["foie",120,320],G:["pdt",200,1000],F:[["oignons",80],["hverts",150],["lait",60],["huile",6]],
+   ins:"Oignons fondus 10 min, ajouter les foies et saisir 4 min (rosés à cœur). Purée au lait, haricots verts."},
+  {id:"poiscasses",n:"Soupe de pois cassés au jambon",s:[1,2],P:["jambon",80,320],G:["pcasses",60,300],F:[["carottes",100],["oignons",50],["pain",80]],
+   ins:"Cuire pois cassés, carottes et oignon dans 4 fois leur volume d'eau 45 min, mixer. Ajouter le jambon en dés. Se congèle bien."},
+  {id:"cassoulet",n:"Cassoulet express à la dinde",s:[1,2],P:["dinde",120,320],G:["hblancs",125,750],F:[["tomates",200],["oignons",50],["epices",2],["huile",8],["pain",80]],
+   ins:"Dorer la dinde en morceaux avec l'oignon, ajouter haricots blancs égouttés, tomates et paprika. Mijoter 20 min."},
+  {id:"boulgour",n:"Boulgour, poulet & ratatouille",s:[1,2],P:["poulet",120,320],G:["boulgour",50,260],F:[["ratatouille",250]],
+   ins:"Boulgour cuit 12 min à l'eau. Poêler le poulet en dés, ajouter la ratatouille et réchauffer."},
+  {id:"taboule",n:"Taboulé protéiné poulet & feta",s:[1,2],P:["poulet",120,320],G:["semoule",50,260],F:[["tomatesf",150],["concombre",150],["feta",30],["huile",10]],
+   ins:"Semoule gonflée à l'eau, refroidie. Ajouter tomates et concombre en dés, poulet grillé, feta émiettée et l'huile. Se prépare la veille."},
+  {id:"grecque",n:"Salade grecque, œufs durs & pain",s:[1,2],P:["oeufs",120,300],G:["pain",60,260],F:[["tomatesf",200],["concombre",200],["feta",40],["huile",8]],
+   ins:"Œufs durs 10 min. Tomates, concombre, feta et huile en salade. Pain grillé à côté."},
+  {id:"omelettechamp",n:"Omelette champignons-emmental & pommes sautées",s:[1,2],P:["oeufs",120,300],G:["pdt",200,1000],F:[["champignons",115],["emmental",20],["huile",8]],
+   ins:"Pommes de terre en cubes sautées 20 min. Omelette aux champignons, emmental au moment de plier."},
+  {id:"shakshuka",n:"Shakshuka & pain grillé",s:[1,2],P:["oeufs",120,300],G:["pain",60,260],F:[["tomates",400],["poivrons",150],["oignons",50],["epices",3],["huile",5]],
+   ins:"Mijoter tomates, poivrons, oignon et cumin 15 min. Creuser des puits, y casser les œufs, couvrir 6 min. Servir avec le pain."},
+  {id:"gratinjambon",n:"Gratin de pâtes jambon-champignons",s:[1,2],P:["jambon",80,320],G:["pates",50,260],F:[["champignons",115],["creme",40],["emmental",20]],
+   ins:"Mélanger pâtes cuites, jambon en dés, champignons et crème. Emmental dessus, 15 min à 200 °C."},
+  {id:"pizzawrap",n:"Pizza tortilla jambon-mozzarella",s:[1,2],P:["jambon",80,320],G:["tortillas",80,320],F:[["tomates",100],["mozza",60],["champignons",60],["epices",1]],
+   ins:"Étaler la tomate sur les tortillas, garnir de jambon, champignons et mozzarella. 8 min à 220 °C, jusqu'à ce que le bord croustille."},
+  {id:"potatoes",n:"Steak haché, potatoes au four & carottes",s:[1,2],P:["steak",100,300],G:["pdt",200,1000],F:[["carottes",150],["huile",12],["epices",3]],
+   ins:"Pommes de terre en quartiers avec huile et paprika, 30 min à 220 °C. Carottes râpées en salade, steaks à la poêle."},
+  {id:"hachis",n:"Hachis parmentier",s:[1,2],P:["steak",100,300],G:["pdt",200,1000],F:[["lait",80],["emmental",20],["oignons",50]],
+   ins:"Viande hachée revenue avec l'oignon, recouverte de purée au lait et d'emmental. 20 min à 200 °C. Parfait en batch."},
+  {id:"boulettes",n:"Boulettes de bœuf sauce tomate & semoule",s:[1,2],P:["steak",100,300],G:["semoule",50,260],F:[["tomates",200],["oignons",40],["epices",3]],
+   ins:"Former des boulettes avec la viande hachée et les épices, les dorer puis les mijoter 15 min dans la tomate. Semoule à côté."},
+  {id:"kefta",n:"Wraps kefta & sauce blanche",s:[1,2],P:["steak",100,300],G:["tortillas",80,320],F:[["fblanc",60],["concombre",100],["epices",3]],
+   ins:"Viande hachée aux épices (cumin, paprika) en petites saucisses à la poêle. Wraps avec concombre et sauce fromage blanc."},
+  {id:"tikka",n:"Poulet tikka, riz & chou-fleur",s:[1,2],P:["poulet",120,320],G:["riz",50,260],F:[["fblanc",100],["chouf",200],["oignons",40],["epices",4]],
+   ins:"Mariner le poulet dans le fromage blanc et le curry (même 15 min suffit), puis le cuire à la poêle. Chou-fleur rôti, riz."},
+  {id:"pouletchamp",n:"Poulet crème-champignons & pâtes",s:[1,2],P:["poulet",120,320],G:["pates",50,260],F:[["champignons",115],["creme",40],["oignons",40]],
+   ins:"Poêler le poulet et l'oignon, ajouter champignons et crème, réduire 5 min. Servir sur les pâtes."},
+  {id:"fajitas",n:"Fajitas poulet-poivrons",s:[1,2],P:["poulet",120,320],G:["tortillas",80,320],F:[["poivrons",200],["oignons",60],["epices",4],["fblanc",50],["huile",6]],
+   ins:"Saisir poulet, poivrons et oignon en lanières avec les épices. Garnir les tortillas, sauce fromage blanc."},
+  {id:"basquaise",n:"Poulet basquaise & riz",s:[1,2],P:["poulet",120,320],G:["riz",50,260],F:[["poivrons",150],["tomates",200],["oignons",50],["epices",2],["huile",6]],
+   ins:"Dorer le poulet, ajouter oignon, poivrons, tomates et paprika. Mijoter 25 min. Servir avec le riz."},
+  {id:"dindecreme",n:"Dinde à la crème, coquillettes & petits pois",s:[1,2],P:["dinde",120,320],G:["pates",50,260],F:[["ppois",150],["creme",40]],
+   ins:"Dinde en dés à la poêle, ajouter petits pois et crème, laisser réduire 5 min. Mélanger aux coquillettes."},
+  {id:"dindewok",n:"Wok de dinde, riz & légumes",s:[1,2],P:["dinde",120,320],G:["riz",50,260],F:[["wok",250],["soja",15],["huile",8]],
+   ins:"Dinde en lanières saisie à feu vif, légumes wok, riz de la veille et sauce soja. 5 min en remuant."},
+  {id:"nicoise",n:"Salade niçoise express",s:[1,2],P:["thon",104,312],G:["pdt",200,1000],F:[["oeufs",60],["hverts",150],["tomatesf",150],["huile",10]],
+   ins:"Pommes de terre et haricots verts cuits puis refroidis, œuf dur, tomates, thon et vinaigrette."},
+  {id:"dahlpc",n:"Curry de pois chiches, œufs & semoule",s:[1,2],P:["oeufs",120,300],G:["semoule",50,260],F:[["pchiches",130],["tomates",200],["oignons",50],["epices",4]],
+   ins:"Mijoter oignon, pois chiches, tomates et curry 15 min. Ajouter des œufs mollets (6 min) coupés en deux. Semoule à côté."},
+  {id:"croque",n:"Croque-monsieur jambon & crudités",s:[1,2],P:["jambon",80,320],G:["pain",60,340],F:[["emmental",40],["tomatesf",150],["concombre",100]],
+   ins:"Pain de mie, jambon et emmental, 10 min au four ou à la poêle. Tomates et concombre en salade."},
+  {id:"pancakes",n:"Pancakes avoine-banane & fromage blanc",s:[1],P:["fblanc",200,650],G:["avoine",60,240],F:[["oeufs",120],["bananes",100],["lait",100]],
+   ins:"Mixer avoine, œufs, banane et lait. Cuire de petits pancakes à la poêle. Servir avec le fromage blanc."},
+  {id:"porridgecacao",n:"Porridge chocolat-banane",s:[1],P:["fblanc",200,650],G:["avoine",60,240],F:[["lait",200],["cacao",10],["bananes",100]],
+   ins:"Cuire les flocons dans le lait avec le cacao 3 min. Hors du feu, ajouter le fromage blanc et la banane."},
+  {id:"overnight",n:"Overnight oats pomme-cannelle",s:[1],P:["fblanc",200,650],G:["avoine",60,240],F:[["pommes",150],["lait",150],["epices",2]],
+   ins:"La veille : mélanger flocons, lait, fromage blanc, pomme râpée et cannelle dans une boîte. Au frigo toute la nuit."},
 ];
 const TYPES = [{n:"Leg Day",c:"t0",m:1.07,sub:"Plus de glucides pour la séance jambes"},{n:"Haut du corps",c:"t1",m:1.03,sub:"Glucides modérés, protéines hautes"},{n:"Repos",c:"t2",m:0.90,sub:"Récupération : moins de glucides, mêmes protéines"}];
 const DRIVE_URL = "https://www.leclercdrive.fr/region-nouvelle-aquitaine/dax/drive-saint-paul-les-dax.aspx";
@@ -394,7 +482,7 @@ function macros(q){
     m.kcal += g*i.k/100; m.P += g*i.p/100; m.G += g*i.g/100; m.L += g*i.l/100; m.cost += g/i.pk*i.px; }
   return m;
 }
-let cache = {};
+let cache = {}, PREV = new Set();
 function solveMeal(r, t){
   const key = r.id + "|" + t;
   if (cache[key]) return cache[key];
@@ -457,9 +545,9 @@ function score(plan){
     const m = dayMacros(d), T = N.types[d.t];
     s += Math.abs(m.kcal - T.kcal)/T.kcal*50 + Math.max(0, T.P - m.P)/T.P*80 + Math.max(0, m.P - T.P*1.2)/T.P*20;
     if (d.meals[0] === d.meals[1]) s += 6;
-    d.meals.forEach(r => { count[r] = (count[r]||0) + 1; const st = S.ratings[r]; if (st) s += (3 - st)*2 + (st === 1 ? 6 : 0); });
+    d.meals.forEach(r => { count[r] = (count[r]||0) + 1; if (PREV.has(r)) s += 1.5; const st = S.ratings[r]; if (st) s += (3 - st)*2 + (st === 1 ? 6 : 0); });
   });
-  for (const r in count) if (count[r] > 2) s += (count[r]-2)*8 + (count[r] > 3 ? 40 : 0);
+  for (const r in count) if (count[r] > 2) s += (count[r]-2)*8 + (count[r] > 3 ? 40 : 0) + (count[r] > 4 ? 400 : 0);
   return {s, cost: sh.cost};
 }
 
@@ -471,6 +559,7 @@ function emptyPlan(start){
 }
 function optimize(start){
   cache = {};
+  PREV = new Set(S.plan ? S.plan.days.flatMap(d => d.meals) : []);
   const p1 = pool(1), p2 = pool(2);
   if (!p1.length || !p2.length) return null;
   let best = null, bestS = Infinity;
@@ -529,7 +618,12 @@ function repairPlan(){
 
 /* ---------- Illustrations des plats ---------- */
 const DISH = {curry:["🍛",28],bowlpates:["🥦",140],chili:["🌶️",4],bolo:["🍝",18],puree:["🥔",40],tortilla:["🍳",48],wraps:["🌯",34],thonpates:["🐟",200],
-  cantonais:["🍚",52],couscous:["🥘",30],dindesemoule:["🍗",24],dindepdt:["🥬",120],lentilles:["🥗",100],dahl:["🍲",36],four:["🍗",14],porridge:["🥣",44],brunch:["🥚",56]};
+  cantonais:["🍚",52],couscous:["🥘",30],dindesemoule:["🍗",24],dindepdt:["🥬",120],lentilles:["🥗",100],dahl:["🍲",36],four:["🍗",14],porridge:["🥣",44],brunch:["🥚",56],
+  porcwok:["🥢",20],porcpuree:["🥩",10],porcpaprika:["🫑",120],colinriz:["🐟",195],colinprov:["🍅",8],colincurry:["🍛",45],parmentiercolin:["🥧",36],colinsemoule:["🐠",190],
+  sardinespates:["🍝",210],foies:["🧅",30],poiscasses:["🥣",95],cassoulet:["🫘",22],boulgour:["🍆",280],taboule:["🥙",85],grecque:["🥒",110],omelettechamp:["🍄",30],
+  shakshuka:["🍳",6],gratinjambon:["🧀",46],pizzawrap:["🍕",12],potatoes:["🍟",42],hachis:["🥘",28],boulettes:["🧆",16],kefta:["🌯",26],tikka:["🍗",20],
+  pouletchamp:["🍄",35],fajitas:["🌮",14],basquaise:["🫑",4],dindecreme:["🫛",100],dindewok:["🥡",160],nicoise:["🥗",130],dahlpc:["🍲",50],croque:["🥪",40],
+  pancakes:["🥞",38],porridgecacao:["🍫",25],overnight:["🍎",0]};
 const dish = (rid, big) => { const [e, h] = DISH[rid] || ["🍽️", 20]; return `<div class="dish${big ? " big" : ""}" style="--dh:hsl(${h} 85% 55%)" aria-hidden="true">${e}</div>`; };
 const ICON = {
   check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
@@ -1049,7 +1143,9 @@ document.addEventListener("change", e => {
   if (e.target.id === "backup-file" && e.target.files[0]){ const f = e.target.files[0]; f.text().then(importData); e.target.value = ""; }
 });
 /* ---------- Import des prix réels (ticket, récap de commande, page du Drive) ---------- */
-const KW = {riz:["riz"],pates:["pates","penne","coquillette","spaghetti","fusilli","macaroni"],semoule:["semoule"],avoine:["avoine"],
+const KW = {porc:["porc","longe"],colin:["colin","lieu"],foie:["foie"],sardines:["sardine"],hblancs:["haricot blanc","haricots blancs","lingot"],pcasses:["pois casse"],
+  boulgour:["boulgour"],champignons:["champignon"],poivrons:["poivron"],creme:["creme"],mozza:["mozzarella"],feta:["feta"],chouf:["chou fleur","chou-fleur"],
+  wok:["wok"],ratatouille:["ratatouille"],concombre:["concombre"],tomatesf:["tomate"],cacao:["cacao"],riz:["riz"],pates:["pates","penne","coquillette","spaghetti","fusilli","macaroni"],semoule:["semoule"],avoine:["avoine"],
   lcorail:["lentille corail","lentilles corail","corail"],lentilles:["lentille","lentilles"],pchiches:["pois chiche"],hrouges:["haricot rouge","haricots rouges"],
   tomates:["tomate concass","tomates concass","concassee"],mais:["mais doux","mais"],thon:["thon"],oeufs:["oeuf"],fblanc:["fromage blanc","fromage frais","fr blanc"],
   lait:["lait"],emmental:["emmental","rape"],jambon:["jambon"],dinde:["dinde"],poulet:["poulet"],steak:["steak","hache"],hverts:["haricot vert","haricots verts"],
@@ -1066,7 +1162,7 @@ function matchIng(line){
 function packFrom(line, id){
   const l = norm(line);
   if (ING[id].u === 60){ const m = l.match(/x\s?(\d{1,2})\b|(\d{1,2})\s?oeufs?/); if (m) { const n = +(m[1] || m[2]); return {g:n*60, lab:`boîte de ${n}`}; } return null; }
-  if (["thon","pchiches","hrouges","mais","tortillas","steak"].includes(id)) return null; // poids égoutté ou unités : on garde le format connu
+  if (["thon","pchiches","hrouges","mais","tortillas","steak","sardines","hblancs","champignons"].includes(id)) return null; // poids égoutté ou unités : on garde le format connu
   const m = l.match(/(\d+(?:[.,]\d+)?)\s?(kg|g|l|cl|ml)\b/);
   if (!m) return null;
   const v = parseFloat(m[1].replace(",", ".")), g = {kg:1000, g:1, l:1000, cl:10, ml:1}[m[2]] * v;
