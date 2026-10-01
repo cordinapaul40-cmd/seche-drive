@@ -57,6 +57,26 @@
   --accent:#E8336D; --accent-2:#FF6F96; --accent-ink:#FFFFFF; --prot:#7B61FF; --ok:#1F9E69; --warn:#C98400; --bad:#D7263D; --rest:#A7838E;
   --f-display:"Baloo 2", system-ui, sans-serif; --f-body:"Quicksand", system-ui, sans-serif; --d-style:normal; --d-weight:800; --d-case:none; --r-lg:28px; --r-md:22px; --r-sm:14px;
   --hero-pattern:radial-gradient(circle at 15% 20%, color-mix(in srgb,var(--tc) 12%,transparent) 0 6px, transparent 7px) 0 0/34px 34px; color-scheme:light }
+:root[data-skin="or"]{ --bg:#0E0C07; --surface:#17140C; --raised:#201B10; --track:#2E2716; --line:#2B2414; --ink:#FBF4E2; --muted:#BDAE88; --faint:#7F7457;
+  --accent:#E8B923; --accent-2:#F6D66B; --accent-ink:#1A1300; --prot:#7FB7FF; --ok:#6FD08C; --warn:#FFB547; --bad:#FF6B5B; --rest:#A89C7F;
+  --f-display:"Cinzel", Georgia, serif; --d-style:normal; --d-weight:900; --hero-size:clamp(2.2rem,11vw,3.4rem); --r-lg:8px; --r-md:6px; --r-sm:4px;
+  --hero-pattern:repeating-linear-gradient(135deg, color-mix(in srgb,var(--accent) 7%,transparent) 0 1px, transparent 1px 14px); color-scheme:dark }
+:root[data-skin="lave"]{ --bg:#120806; --surface:#1C0E0A; --raised:#26130D; --track:#3A1C13; --line:#351A11; --ink:#FFF1EA; --muted:#C79A88; --faint:#8A6457;
+  --accent:#FF4D1A; --accent-2:#FFA41B; --accent-ink:#1A0500; --prot:#5EC8FF; --ok:#6EE7A8; --warn:#FFD166; --bad:#FF3355; --rest:#B08A7E;
+  --f-display:"Anton", Impact, sans-serif; --d-style:normal; --d-weight:400;
+  --hero-pattern:radial-gradient(ellipse at 50% 130%, color-mix(in srgb,var(--accent) 35%,transparent), transparent 65%); color-scheme:dark }
+:root[data-skin="galaxie"]{ --bg:#070818; --surface:#0F1130; --raised:#161941; --track:#23275C; --line:#1F2352; --ink:#EEF0FF; --muted:#9EA3D6; --faint:#666BA3;
+  --accent:#8C7CFF; --accent-2:#C3B8FF; --accent-ink:#0A0626; --prot:#3FE0FF; --ok:#4DF0B0; --warn:#FFD36E; --bad:#FF5C8A; --rest:#8D92C2;
+  --f-display:"Audiowide", system-ui, sans-serif; --f-body:"Exo 2", system-ui, sans-serif; --d-style:normal; --d-weight:400; --hero-size:clamp(2rem,10vw,3.2rem); --r-lg:22px;
+  --hero-pattern:radial-gradient(circle, #fff 0 1px, transparent 1.5px) 0 0/37px 41px, radial-gradient(circle, #fff9 0 1px, transparent 1.5px) 13px 19px/53px 47px; color-scheme:dark }
+:root[data-skin="diamant"]{ --bg:#F1F7FB; --surface:#FFFFFF; --raised:#E6F0F7; --track:#D3E3EE; --line:#D6E4EE; --ink:#0E2233; --muted:#4F6A7E; --faint:#8BA0B0;
+  --accent:#0B8FD6; --accent-2:#35B5F0; --accent-ink:#FFFFFF; --prot:#7A5CFF; --ok:#13A36F; --warn:#B97A00; --bad:#D33A4A; --rest:#7891A3;
+  --f-display:"Montserrat", system-ui, sans-serif; --f-body:"Montserrat", system-ui, sans-serif; --d-style:normal; --d-weight:800; --r-lg:16px;
+  --hero-pattern:linear-gradient(120deg, transparent 40%, color-mix(in srgb,var(--accent) 10%,transparent) 50%, transparent 60%); color-scheme:light }
+:root[data-skin="titan"]{ --bg:#0B0F0D; --surface:#121915; --raised:#18221C; --track:#22302A; --line:#203029; --ink:#EAF7EE; --muted:#93AB9C; --faint:#5E7567;
+  --accent:#39FF88; --accent-2:#8BFFBC; --accent-ink:#03140A; --prot:#4FC3F7; --ok:#39FF88; --warn:#FFD54F; --bad:#FF5252; --rest:#8FA398;
+  --f-display:"Russo One", system-ui, sans-serif; --d-style:normal; --d-weight:400; --r-lg:4px; --r-md:4px; --r-sm:2px;
+  --hero-pattern:repeating-linear-gradient(90deg, color-mix(in srgb,var(--accent) 6%,transparent) 0 2px, transparent 2px 10px); color-scheme:dark }
 *{box-sizing:border-box}
 html,body{background:var(--bg)}
 body{color:var(--ink);font:16px/1.45 var(--f-body);padding-inline:16px;padding-block:0 calc(96px + env(safe-area-inset-bottom,0px));font-variant-numeric:tabular-nums;-webkit-tap-highlight-color:transparent}
@@ -248,6 +268,48 @@ label.dis{font-size:.74rem;color:var(--muted);display:inline-flex;gap:5px;align-
 /* Alertes et remplacements */
 .alert{border-color:color-mix(in srgb,var(--warn) 60%,transparent);background:color-mix(in srgb,var(--warn) 8%,var(--surface))}
 .swapped{border-style:dashed}
+/* Coach, boss, roulette, avatar, cochon, fidélité */
+.coach{display:flex;flex-direction:row;gap:14px;align-items:center}
+.cface{width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:28px;background:var(--raised);border:2px solid var(--accent)}
+.coach p{margin-top:4px;font-weight:600}
+.coaches{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.coaches button{flex-direction:column;align-items:flex-start;text-align:left;gap:6px;border-radius:var(--r-md);min-height:0;padding:12px}
+.coaches button.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--raised))}
+.coaches .cface{width:40px;height:40px;font-size:22px}
+.boss{border-color:color-mix(in srgb,var(--bad) 55%,transparent);background:color-mix(in srgb,var(--bad) 7%,var(--surface));display:flex;flex-direction:column;gap:12px}
+.boss.won{border-color:color-mix(in srgb,var(--ok) 55%,transparent);background:color-mix(in srgb,var(--ok) 7%,var(--surface))}
+.boss .chip{--tc:var(--bad)} .boss.won .chip{--tc:var(--ok)}
+.bface{font-size:44px;line-height:1;flex:none}
+.gauge.hp i{background:linear-gradient(90deg,var(--bad),var(--warn))}
+.roulbtn{width:100%}
+.wheel{position:relative;width:260px;height:260px;margin:6px auto}
+.wheel svg{display:block}
+.ptr{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-top:24px solid var(--ink);z-index:1;filter:drop-shadow(0 2px 2px #0006)}
+.typepick.two{grid-template-columns:repeat(2,1fr)}
+.typepick.two button{--tc:var(--accent);gap:4px}
+.typepick.two .small{font-weight:500;text-align:center}
+.avwrap{display:flex;flex-direction:row;gap:12px;align-items:center}
+.avwrap svg{flex:none;background:radial-gradient(circle at 50% 45%,var(--raised),transparent 70%);border-radius:var(--r-md)}
+.avwrap p{margin-top:6px}
+.avprev{display:grid;place-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{min-height:38px;padding:6px 12px;border-radius:999px;font-size:.88rem}
+.chips button.on{border-color:var(--accent);color:var(--accent)}
+.chips .dotc{width:38px;height:38px;padding:0;border:3px solid var(--line)}
+.chips .dotc.on{border-color:var(--ink);box-shadow:0 0 0 2px var(--accent)}
+.pig{display:flex;flex-direction:column;gap:12px}
+.pigface{font-size:52px;line-height:1}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.tier{border:1px dashed var(--line);border-radius:var(--r-sm);padding:8px 4px;text-align:center;display:flex;flex-direction:column;font-size:.78rem;color:var(--muted)}
+.tier b{font:700 1.05rem var(--f-display);color:var(--ink)}
+.tier.on{border-style:solid;border-color:var(--warn);color:var(--warn)}
+.loyal{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:var(--r-md);background:var(--raised)}
+.stamps{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.stamps i{aspect-ratio:1;border-radius:50%;border:2px dashed var(--faint)}
+.stamps i.on{border:0;background:radial-gradient(circle at 35% 35%,#FFE38A,#E0A400);box-shadow:inset 0 0 0 2px #0002}
+.stamps.sm{width:120px;gap:2px;flex:none} .stamps.sm i{border-width:1px}
+.lrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:.92rem}
+.skin.locked{cursor:default;opacity:.75} .skin.locked .mock{display:grid;place-items:center;font-size:28px;background:var(--track)}
 .typepick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .typepick button{flex-direction:column;border-radius:var(--r-md);min-height:72px;font-weight:700}
 .typepick button.on{border-color:var(--tc);color:var(--tc);background:color-mix(in srgb,var(--tc) 12%,var(--raised))}
@@ -1357,6 +1419,437 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("input", e => { if (e.target.id && e.target.id.startsWith("o-")) otherUI(); });
 document.addEventListener("change", e => { if (e.target.id && e.target.id.startsWith("o-")) otherUI(); });
+
+/* ---------- État des fonctions ludiques ---------- */
+const FUN_DEF = {coach:"pote", boss:{}, avatar:{skin:1, hair:"court", hc:0, beard:"non", top:"nu", oc:0, acc:"non"}, loyal:{}, goldSeen:[], unlocked:[], piggy:{goal:"Nouvelle paire de baskets", target:80}};
+for (const k in FUN_DEF) if (S[k] === undefined) S[k] = JSON.parse(JSON.stringify(FUN_DEF[k]));
+for (const k in FUN_DEF.avatar) if (S.avatar[k] === undefined) S.avatar[k] = FUN_DEF.avatar[k];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dayNum = () => diffDays(TODAY, "2026-01-01");
+
+/* ---------- Coach à personnalité ---------- */
+const COACHES = {
+  sergent:{e:"🪖", n:"Sergent Krak", d:"Strict, il ne lâche rien", L:{
+    t0:["Leg Day, soldat ! Les escaliers vont te détester demain, et c'est le but.","Jambes aujourd'hui. Personne n'a jamais regretté un squat, à part les tire-au-flanc."],
+    t1:["Haut du corps ! Pecs, dos, épaules : je veux du travail propre.","Aujourd'hui on pousse et on tire. Pas de demi-répétitions sous mon commandement."],
+    t2:["Repos autorisé, soldat. Les repas, eux, ne prennent pas de permission.","Jour de repos. Tu dors, tu manges propre, et demain tu reviens plus fort."],
+    done:["Deux repas sur deux. Mission accomplie, rompez !","Journée validée. Je ne le dirai qu'une fois : bon travail."],
+    swap:["Un repas hors plan ? C'est noté dans ton dossier. On compense au prochain.","Écart enregistré. Je ne crie pas, je prends des notes."],
+    over:["Budget dépassé de {over} ! On ne pille pas les rations de la semaine prochaine.","Ligne rouge du budget franchie de {over}. Demi-tour, marche !"],
+    skip:["{n} séances reportées en 2 semaines ? Inacceptable. Sac prêt ce soir, pas de discussion.","{n} reports, soldat. L'ennemi s'appelle Canapé, et il est en train de gagner."],
+    shift:["Encore une séance décalée, soldat ? {next} t'attend, et je surveille.","Séance reportée. {next} au programme, ne me fais pas répéter."],
+    boss:["Boss abattu ! Voilà un soldat qui mérite ses galons."], gold:["{r} passe en or. Même moi, je salue."],
+    pig:["{x} au trésor de guerre. Thème secret « {t} » débloqué, soldat."]}},
+  pote:{e:"🤙", n:"Max, ton pote", d:"Cool et toujours positif", L:{
+    t0:["C'est Leg Day ! Grosse séance, et après on mange bien.","Jambes aujourd'hui. Ce soir t'as le droit de prendre l'ascenseur."],
+    t1:["Haut du corps aujourd'hui, ça va pomper ! Profite.","Séance haut du corps : propre, tranquille, et on lâche rien."],
+    t2:["Jour off, récupère bien. Tes muscles grandissent pendant que tu chill.","Repos aujourd'hui. Tes deux repas et une bonne nuit, c'est tout ce que je demande."],
+    done:["Journée validée, t'es une machine !","Deux repas cochés, c'est carré. Fier de toi."],
+    swap:["T'as mangé autre chose ? Pas grave, ça arrive, on repart au prochain repas.","Petit écart noté. Un repas ne défait pas une semaine, t'inquiète."],
+    over:["Aïe, budget dépassé de {over} cette semaine. On se rattrape sur la suivante.","Le budget a pris {over} de trop. Rien de grave, on resserre un peu."],
+    skip:["{n} séances décalées en 2 semaines… Je sais que c'est dur, mais tu vaux mieux que ça. On y retourne ?","{n} reports, ça commence à faire. Juste l'échauffement à la prochaine, deal ?"],
+    shift:["Pas de souci, on décale. Prochaine séance : {next}, je compte sur toi !","OK, séance décalée. {next} ensuite, on se rattrape."],
+    boss:["Boss battu ! T'es chaud cette semaine."], gold:["{r} en version or ! Tu deviens un vrai chef."],
+    pig:["{x} d'économisés, trop fort ! Thème secret « {t} » débloqué."]}},
+  mamie:{e:"👵", n:"Mamie Jo", d:"Tendre, mais elle veut que tu manges", L:{
+    t0:["Ah, les jambes aujourd'hui mon petit ! Et tu finis ton assiette.","Leg Day ? De mon temps, on appelait ça monter au grenier. Courage, mon chéri."],
+    t1:["Les bras et le dos aujourd'hui. Tu me porteras mes courses après ?","Haut du corps, très bien. N'oublie pas ta veste en sortant de la salle."],
+    t2:["Repos aujourd'hui, mon grand. Un bon repas, une bonne nuit, et voilà.","Pas de sport aujourd'hui ? Tant mieux, viens manger, c'est prêt."],
+    done:["Tu as tout mangé, je suis fière de toi mon chéri.","Deux repas sur deux, comme un grand. Mamie est contente."],
+    swap:["Tu as mangé ailleurs ? Bon… j'espère au moins que c'était bon.","Un petit écart, ce n'est rien. Au prochain repas, on reprend comme il faut."],
+    over:["Oh là là, {over} de plus que prévu. Il faut faire attention aux sous, mon petit.","Tu as dépensé {over} de trop. On fera les comptes ensemble, va."],
+    skip:["{n} séances repoussées en 2 semaines, mon chéri ? Ton grand-père aurait dit : un peu de nerf !","{n} fois que tu repousses… Je t'ai tricoté de la motivation : enfile-la et vas-y."],
+    shift:["Encore une séance repoussée ? Bon, la prochaine c'est {next}, et je te prépare ton sac.","Tu décales encore ? D'accord, mais {next}, tu y vas. Promis ?"],
+    boss:["Tu as gagné ton défi ! Viens que je t'embrasse."], gold:["{r} en or ! Tu cuisines presque aussi bien que moi."],
+    pig:["{x} de côté, quel petit économe ! Tiens, le thème « {t} » pour toi."]}},
+  robot:{e:"🤖", n:"Unité S-3000", d:"Froid, précis, chiffré", L:{
+    t0:["Protocole Leg Day activé. Apport en glucides augmenté de 7 %.","Jour jambes détecté. Cible : {kcal} kcal, {P} g de protéines."],
+    t1:["Protocole haut du corps. Cible : {P} g de protéines. Exécution.","Séance haut du corps planifiée. Glucides modérés, protéines maximales."],
+    t2:["Mode récupération. Glucides réduits de 10 %. Synthèse musculaire en cours.","Jour de repos. Cible : {kcal} kcal. Sommeil recommandé : 8 h."],
+    done:["Journée validée. Conformité nutritionnelle : 100 %.","Deux repas sur deux enregistrés. Statut : optimal."],
+    swap:["Repas non conforme détecté. Coût et macros intégrés au calcul.","Écart enregistré. Recalcul effectué."],
+    over:["Alerte : budget dépassé de {over}. Correction recommandée.","Dépassement budgétaire : {over}. Anomalie consignée."],
+    skip:["Anomalie : {n} séances reportées en 14 jours. Risque de stagnation en hausse.","{n} reports détectés. Recommandation : séance courte, 30 minutes."],
+    shift:["Séance reportée. Cycle recalibré : {next} à la prochaine séance.","Report enregistré. Prochaine séance : {next}."],
+    boss:["Boss neutralisé. Récompense transférée."], gold:["Recette {r} : statut or. Astuce débloquée."],
+    pig:["Épargne : {x}. Palier franchi. Thème « {t} » déverrouillé."]}},
+};
+const coach = () => COACHES[S.coach] || COACHES.pote;
+function coachLine(key, v = {}){
+  const L = coach().L[key] || [""], s = L[(dayNum() + key.length) % L.length];
+  return s.replace(/\{(\w+)\}/g, (_, k) => v[k] !== undefined ? v[k] : "");
+}
+function coachCard(){
+  const t = typeOf(TODAY), T = needs().types[t], d = planDay(TODAY);
+  const bw = budgetWeek(), cost = (S.plan ? shopping(aggregate(S.plan)).cost : 0) + extraCost();
+  let key = "t" + t;
+  if (cost > bw + 0.005) key = "over";
+  else if (dayDone(TODAY)) key = "done";
+  else if (d && [0,1].some(mi => swapOf(TODAY, mi))) key = "swap";
+  const c = coach();
+  return `<div class="card tight coach"><div class="cface" aria-hidden="true">${c.e}</div>
+    <div><div class="label">${c.n}</div><p>${esc(coachLine(key, {kcal:n0(T.kcal), P:T.P, over:eur(cost - bw)}))}</p></div></div>`;
+}
+function coachPick(){
+  return `<div class="card"><h3>Ton coach</h3><p class="small muted">Il change le ton des messages et des alertes.</p>
+    <div class="coaches">${Object.entries(COACHES).map(([id, c]) => `<button class="${S.coach === id ? "on" : ""}" data-act="coach" data-id="${id}" aria-pressed="${S.coach === id}">
+      <span class="cface" aria-hidden="true">${c.e}</span><b>${c.n}</b><span class="small muted">${c.d}</span></button>`).join("")}</div></div>`;
+}
+
+/* ---------- Thèmes secrets (cochon tirelire et boss) ---------- */
+SKINS.push(
+  {id:"or", n:"Or", d:"Noir et or, gravé", c:["#0E0C07","#E8B923","#7FB7FF","#FBF4E2"], meta:"#0E0C07", f:"Cinzel:wght@700;900", secret:"pig", tier:10},
+  {id:"lave", n:"Lave", d:"Rouge braise et orange", c:["#120806","#FF4D1A","#5EC8FF","#FFF1EA"], meta:"#120806", f:"Anton", secret:"pig", tier:25},
+  {id:"galaxie", n:"Galaxie", d:"Violet cosmique étoilé", c:["#070818","#8C7CFF","#3FE0FF","#EEF0FF"], meta:"#070818", f:"Audiowide&family=Exo+2:wght@400;500;600;700", secret:"pig", tier:50},
+  {id:"diamant", n:"Diamant", d:"Clair, bleu glacier", c:["#F1F7FB","#0B8FD6","#7A5CFF","#0E2233"], meta:"#F1F7FB", f:"Montserrat:wght@500;600;700;800", secret:"pig", tier:100},
+  {id:"titan", n:"Titan", d:"Acier et vert électrique", c:["#0B0F0D","#39FF88","#4FC3F7","#EAF7EE"], meta:"#0B0F0D", f:"Russo+One", secret:"boss"},
+);
+if (!S.unlocked.includes(S.skin) && SKINS.find(k => k.id === S.skin && k.secret)) S.skin = "sport";
+applySkin(S.skin);
+skinsCard = function(){
+  const free = SKINS.filter(k => !k.secret), sec = SKINS.filter(k => k.secret);
+  const tile = k => `<button class="skin ${S.skin === k.id ? "on" : ""}" data-act="skin" data-id="${k.id}" aria-pressed="${S.skin === k.id}">
+      <div class="mock" style="background:${k.c[0]};color:${k.c[3]};box-shadow:inset 0 0 0 1px ${k.c[3]}22"><b style="color:${k.c[1]}">Leg Day</b>
+        <div style="display:flex;gap:6px"><i style="flex:2;background:${k.c[1]}"></i><i style="flex:1;background:${k.c[2]}"></i></div></div>
+      <span class="nm">${k.n}${S.skin === k.id ? " ✓" : ""}</span><span class="ds">${k.d}</span></button>`;
+  const locked = k => `<div class="skin locked" aria-label="Thème secret verrouillé"><div class="mock">🔒</div>
+      <span class="nm">Thème secret</span><span class="ds">${k.secret === "pig" ? `Cochon tirelire : ${k.tier} € économisés` : "Bats ton premier boss du dimanche"}</span></div>`;
+  return `<div class="card"><div class="row between"><h3>Thèmes</h3><span class="label">${free.length + S.unlocked.length} / ${SKINS.length}</span></div>
+    <p class="small muted">Change toute l'apparence de l'appli. Tes données et les fonctions restent les mêmes.</p>
+    <div class="skins">${free.map(tile).join("")}</div>
+    <h3 style="margin-top:6px">Thèmes secrets</h3>
+    <div class="skins">${sec.map(k => S.unlocked.includes(k.id) ? tile(k) : locked(k)).join("")}</div></div>`;
+};
+function unlock(id){
+  if (S.unlocked.includes(id)) return false;
+  S.unlocked.push(id); return true;
+}
+
+/* ---------- Cochon tirelire ---------- */
+const TIERS = SKINS.filter(k => k.secret === "pig");
+function extraBetween(a, b){
+  let s = 0; for (const date in S.swaps) if (date >= a && date <= b) for (const mi in S.swaps[date]) s += S.swaps[date][mi].cost || 0;
+  return s;
+}
+function piggyWeeks(){
+  const byStart = {}; S.history.forEach(h => byStart[h.start] = h);
+  return Object.values(byStart).map(h => ({start:h.start, saved: Math.max(0, h.budget - h.cost - extraBetween(h.start, addDays(h.start, 6)))}));
+}
+const piggyTotal = () => piggyWeeks().reduce((a, w) => a + w.saved, 0);
+function pigCard(){
+  const tot = piggyTotal(), next = TIERS.find(k => tot < k.tier), g = S.piggy, prev = next ? (TIERS[TIERS.indexOf(next)-1] || {tier:0}).tier : 0;
+  return `<div class="card pig"><div class="row between"><h2>Cochon tirelire</h2><span class="label">${piggyWeeks().length} semaine${piggyWeeks().length > 1 ? "s" : ""} validée${piggyWeeks().length > 1 ? "s" : ""}</span></div>
+    <div class="row" style="flex-wrap:nowrap;gap:16px"><div class="pigface" aria-hidden="true">🐷</div>
+      <div><div class="big price">${eur(tot)}</div><div class="small muted">économisés sous le budget</div></div></div>
+    ${next ? `<div><div class="row between small"><span class="muted">Prochain thème secret</span><span>${eur(tot)} / ${eur(next.tier)}</span></div>
+      <div class="gauge"><i style="width:${Math.min(100, (tot - prev)/(next.tier - prev)*100)}%;background:var(--warn)"></i></div></div>` : `<p class="small">Tous les thèmes secrets du cochon sont débloqués.</p>`}
+    <div class="tiers">${TIERS.map(k => `<div class="tier ${S.unlocked.includes(k.id) ? "on" : ""}"><b>${k.tier} €</b><span>${S.unlocked.includes(k.id) ? k.n : "🔒 secret"}</span></div>`).join("")}</div>
+    <div class="form"><label>Mon objectif<input type="text" id="pig-goal" value="${esc(g.goal)}" maxlength="40"></label><label>Prix (€)<input type="number" id="pig-target" min="1" step="1" value="${g.target}"></label></div>
+    <div><div class="row between small"><span class="muted">${esc(g.goal)}</span><span>${Math.min(100, Math.round(tot/g.target*100))} %</span></div>
+      <div class="gauge"><i style="width:${Math.min(100, tot/g.target*100)}%;background:var(--ok)"></i></div></div>
+    <p class="small muted">Quand tu valides tes courses (écran Courses), ce qui reste sous le budget de la semaine tombe dans le cochon, moins ce que tu as dépensé hors plan.</p></div>`;
+}
+
+/* ---------- Carte de fidélité des recettes ---------- */
+const GOLD = 10;
+const TIPS = {
+  poulet:"Sale le poulet 30 minutes avant de le cuire : il reste juteux même bien cuit.",
+  oeufs:"Sors les œufs du frigo 10 minutes avant : ils cuisent plus régulièrement et craquent moins.",
+  steak:"Saisis le steak haché à feu vif sans y toucher pendant 2 minutes : tu obtiens une vraie croûte.",
+  dinde:"La dinde sèche vite : coupe-la en fines lanières et cuis-la 4 minutes, pas plus.",
+  colin:"Cuis le colin à couvert sur feu doux : il reste entier et nacré.",
+  thon:"Un trait de citron et une cuillère de moutarde transforment le thon en boîte.",
+  porc:"Laisse reposer le porc 3 minutes après cuisson avant de le couper : le jus reste dedans.",
+  jambon:"Ajoute le jambon en toute fin de cuisson : il garde son goût et ne durcit pas.",
+  fblanc:"Un peu de cannelle ou de vanille dans le fromage blanc remplace le sucre.",
+  tofu:"Presse le tofu 15 minutes entre deux torchons : il dore beaucoup mieux.",
+  skyr:"Prépare le skyr la veille avec les flocons : texture de cheesecake le lendemain.",
+  sardines:"Écrase les sardines avec un peu de moutarde : tartinade express et pleine de protéines.",
+  crevettes:"Les crevettes sont cuites dès qu'elles deviennent roses : 2 minutes suffisent.",
+  foie:"Ne sale le foie qu'en fin de cuisson, sinon il durcit.",
+  cottage:"Le cottage cheese poivré avec de la ciboulette fait une sauce froide très légère.",
+};
+const tipOf = rid => TIPS[(REC_BY[rid].P || [])[0]] || "Prépare une double portion et garde la moitié pour demain : un repas prêt, c'est un écart évité.";
+const stamps = rid => Object.values(S.loyal).filter(x => x === rid).length;
+function syncLoyal(){
+  if (!S.plan) return [];
+  S.plan.days.forEach(d => d.meals.forEach((rid, mi) => {
+    const key = d.date + ":" + mi;
+    if (eatenOf(d.date)[mi] && !swapOf(d.date, mi)) S.loyal[key] = rid; else delete S.loyal[key];
+  }));
+  const fresh = [...new Set(Object.values(S.loyal))].filter(rid => stamps(rid) >= GOLD && !S.goldSeen.includes(rid));
+  fresh.forEach(rid => S.goldSeen.push(rid));
+  return fresh;
+}
+function stampsHTML(rid){
+  const n = stamps(rid);
+  return `<div class="loyal"><div class="row between"><span class="label">Carte de fidélité</span><span class="small ${n >= GOLD ? "" : "muted"}">${n >= GOLD ? "🥇 Version or" : `${n} / ${GOLD}`}</span></div>
+    <div class="stamps">${Array.from({length:GOLD}, (_, i) => `<i class="${i < n ? "on" : ""}"></i>`).join("")}</div>
+    ${n >= GOLD ? `<p class="small"><b>Astuce de chef :</b> ${tipOf(rid)}</p>` : `<p class="small muted">Encore ${GOLD - n} fois mangé pour passer ce plat en or et débloquer une astuce de chef.</p>`}</div>`;
+}
+function loyaltyCard(){
+  const ids = [...new Set(Object.values(S.loyal))].sort((a, b) => stamps(b) - stamps(a)).slice(0, 8);
+  return `<div class="card"><div class="row between"><h2>Fidélité</h2><span class="label">${S.goldSeen.length} plat${S.goldSeen.length > 1 ? "s" : ""} en or</span></div>
+    ${ids.length ? ids.map(rid => { const n = stamps(rid); return `<div class="lrow"><span>${n >= GOLD ? "🥇 " : ""}${REC_BY[rid].n}</span>
+      <div class="stamps sm">${Array.from({length:GOLD}, (_, i) => `<i class="${i < n ? "on" : ""}"></i>`).join("")}</div></div>`; }).join("")
+      : `<p class="small muted">Chaque repas coché « mangé » ajoute un tampon sur la carte du plat. À ${GOLD} tampons, il passe en or et tu débloques une astuce de chef.</p>`}</div>`;
+}
+
+/* ---------- Avatar qui sèche ---------- */
+const AV = {
+  skin:["#F6D3B3","#E8B48A","#C68A5E","#8D5A3B","#5A3825"],
+  hc:["#1E1A17","#5B3A1E","#A0662B","#E2C27A","#B33A2A","#9A9A9A"],
+  oc:["#FF6B2C","#43B8FF","#3DDC97","#2B2B2B","#E8336D","#FFD400"],
+  hair:[["court","Court"],["rase","Rasé"],["boucle","Bouclé"],["long","Long attaché"],["crete","Crête"]],
+  beard:[["non","Aucune"],["barbe","Barbe"],["moustache","Moustache"]],
+  top:[["nu","Torse nu"],["debardeur","Débardeur"]],
+  acc:[["non","Rien"],["casquette","Casquette"],["bandeau","Bandeau"],["lunettes","Lunettes"],["haltere","Haltère"]],
+};
+function shredLevel(){
+  const W = sortedW(), start = W.length ? W[0].kg : S.profile.poids, goal = S.profile.objectif, now = latestWeight();
+  if (start <= goal) return 1;
+  return clamp((start - now)/(start - goal), 0, 1);
+}
+const STAGES = [[0,"Début de sèche"],[.2,"Ça se dessine"],[.45,"Abdos en vue"],[.75,"Plaquette"],[1,"Objectif atteint"]];
+const stageOf = p => STAGES.filter(s => p >= s[0]).pop()[1];
+function avatarSVG(a = S.avatar, p = shredLevel(), size = 180){
+  const sk = AV.skin[a.skin] || AV.skin[1], hc = AV.hc[a.hc] || AV.hc[0], oc = AV.oc[a.oc] || AV.oc[0];
+  const sw = 50 + 10*p, ww = 40 - 8*p, belly = 16*(1 - p), arm = 15 + 6*p, abs = clamp((p - .12)*1.3, 0, .85);
+  const dark = "rgba(60,30,15,.55)";
+  const torso = `M${100-sw},96 C${100-sw-2},120 ${100-ww-belly},140 ${100-ww-belly*.6},158 L${100-ww},178 L${100+ww},178 L${100+ww+belly*.6},158 C${100+ww+belly},140 ${100+sw+2},120 ${100+sw},96 Q100,86 ${100-sw},96Z`;
+  const hair = {
+    court:`<path d="M72,50 Q72,22 100,22 Q128,22 128,50 Q122,34 100,34 Q78,34 72,50Z" fill="${hc}"/>`,
+    rase:`<path d="M74,46 Q76,24 100,24 Q124,24 126,46 Q114,36 100,36 Q86,36 74,46Z" fill="${hc}" opacity=".55"/>`,
+    boucle:`<g fill="${hc}">${[[78,36],[90,26],[104,24],[117,30],[125,42],[73,46],[98,32],[112,36]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="10"/>`).join("")}</g>`,
+    long:`<path d="M72,52 Q70,20 100,20 Q130,20 128,52 Q124,32 100,32 Q76,32 72,52Z" fill="${hc}"/><circle cx="100" cy="16" r="9" fill="${hc}"/>`,
+    crete:`<path d="M92,36 L96,8 L104,8 L108,36Z" fill="${hc}"/><path d="M74,46 Q76,30 92,30 L92,36 Q82,38 74,46Z M126,46 Q124,30 108,30 L108,36 Q118,38 126,46Z" fill="${hc}" opacity=".45"/>`,
+  }[a.hair] || "";
+  const beard = a.beard === "barbe" ? `<path d="M76,58 Q78,82 100,84 Q122,82 124,58 Q118,72 100,72 Q82,72 76,58Z" fill="${hc}"/>`
+    : a.beard === "moustache" ? `<path d="M88,66 Q100,60 112,66 Q100,64 88,66Z" fill="${hc}" stroke="${hc}" stroke-width="3" stroke-linejoin="round"/>` : "";
+  const acc = {
+    casquette:`<path d="M72,44 Q72,18 100,18 Q128,18 128,44Z" fill="${oc}"/><path d="M118,42 L146,46 L128,48Z" fill="${oc}"/>`,
+    bandeau:`<rect x="73" y="36" width="54" height="8" rx="3" fill="${oc}"/>`,
+    lunettes:`<g fill="#111" opacity=".9"><rect x="80" y="48" width="17" height="10" rx="4"/><rect x="103" y="48" width="17" height="10" rx="4"/><rect x="96" y="51" width="8" height="2"/></g>`,
+    haltere:`<g transform="translate(${100+sw+arm/2+4},190)"><rect x="-16" y="-3" width="32" height="6" rx="2" fill="#555"/><rect x="-22" y="-10" width="8" height="20" rx="2" fill="#333"/><rect x="14" y="-10" width="8" height="20" rx="2" fill="#333"/></g>`,
+  }[a.acc] || "";
+  const absLines = a.top === "nu" ? `<g stroke="${dark}" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="${abs}">
+      <path d="M100,124 L100,172"/>${[130,145,160].map(y => `<path d="M${88+p*2},${y} Q94,${y+3} 98,${y}"/><path d="M102,${y} Q106,${y+3} ${112-p*2},${y}"/>`).join("")}</g>
+    <g stroke="${dark}" stroke-width="2.2" fill="none" opacity="${.25 + .5*p}"><path d="M${100-sw+12},112 Q${100-sw/2},${120+4*p} 98,112"/><path d="M${100+sw-12},112 Q${100+sw/2},${120+4*p} 102,112"/></g>` : "";
+  const top = a.top === "debardeur" ? `<path d="M${100-sw+14},96 Q100,${112} ${100+sw-14},96 L${100+ww+belly*.6+2},158 L${100+ww+1},180 L${100-ww-1},180 L${100-ww-belly*.6-2},158Z" fill="${oc}"/>` : "";
+  return `<svg viewBox="0 0 200 240" width="${size}" height="${size*1.2}" role="img" aria-label="Ton avatar, niveau de sèche ${Math.round(p*100)} %">
+    <ellipse cx="100" cy="232" rx="60" ry="6" fill="var(--track)"/>
+    <g fill="${sk}">
+      <rect x="${100-sw-arm+4}" y="98" width="${arm}" height="92" rx="${arm/2}" transform="rotate(8 ${100-sw} 98)"/>
+      <rect x="${100+sw-4}" y="98" width="${arm}" height="92" rx="${arm/2}" transform="rotate(-8 ${100+sw} 98)"/>
+      <rect x="90" y="70" width="20" height="24" rx="6"/>
+      <path d="${torso}"/>
+      <rect x="${100-ww+4}" y="196" width="${ww-8}" height="36" rx="7"/><rect x="104" y="196" width="${ww-8}" height="36" rx="7"/>
+      <circle cx="100" cy="52" r="27"/>
+    </g>
+    ${absLines}${top}
+    <path d="M${100-ww-1},176 L${100+ww+1},176 L${100+ww+3},206 L102,206 L100,196 L98,206 L${100-ww-3},206Z" fill="${oc}"/>
+    <path d="M${100-ww-1},176 L${100+ww+1},176 L${100+ww+1},182 L${100-ww-1},182Z" fill="#000" opacity=".25"/>
+    <g fill="#1B1B1B"><circle cx="90" cy="52" r="2.6"/><circle cx="110" cy="52" r="2.6"/></g>
+    <path d="M91,63 Q100,70 109,63" stroke="#1B1B1B" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    ${hair}${beard}${acc}</svg>`;
+}
+function avatarCard(){
+  const p = shredLevel(), next = STAGES.find(s => s[0] > p);
+  return `<div class="card avcard"><div class="row between"><h2>Ton avatar</h2><button class="ghost" data-act="av-open">Personnaliser</button></div>
+    <div class="avwrap">${avatarSVG(S.avatar, shredLevel(), 150)}<div><div class="label">Niveau de sèche</div><div class="big">${Math.round(p*100)} %</div>
+      <p class="small"><b>${stageOf(p)}</b></p><p class="small muted">${next ? `Prochaine étape à ${Math.round(next[0]*100)} % : ${next[1].toLowerCase()}.` : "Plaquette dessinée, objectif atteint."}</p>
+</div></div>
+    <p class="small muted">Ses abdos se dessinent avec ta perte de poids réelle, de ta première pesée (${kgf(sortedW().length ? sortedW()[0].kg : S.profile.poids)} kg) à ton objectif de ${kgf(S.profile.objectif)} kg.</p></div>`;
+}
+function avatarSheet(){
+  const a = S.avatar;
+  const chips = (k, list) => `<div class="chips">${list.map(([v, n]) => `<button class="${a[k] === v ? "on" : ""}" data-act="av" data-k="${k}" data-v="${v}">${n}</button>`).join("")}</div>`;
+  const dots = (k) => `<div class="chips">${AV[k].map((c, i) => `<button class="dotc ${a[k] === i ? "on" : ""}" style="background:${c}" data-act="av" data-k="${k}" data-v="${i}" aria-label="Couleur ${i+1}"></button>`).join("")}</div>`;
+  return `<div class="grab"></div><h2>Ton avatar</h2>
+    <div class="avprev">${avatarSVG(a, shredLevel(), 150)}</div>
+    <div class="label">Peau</div>${dots("skin")}
+    <div class="label">Coiffure</div>${chips("hair", AV.hair)}
+    <div class="label">Couleur des cheveux</div>${dots("hc")}
+    <div class="label">Barbe</div>${chips("beard", AV.beard)}
+    <div class="label">Tenue</div>${chips("top", AV.top)}
+    <div class="label">Couleur de la tenue</div>${dots("oc")}
+    <div class="label">Accessoire</div>${chips("acc", AV.acc)}
+    <button class="primary" data-act="close">C'est moi</button>`;
+}
+
+/* ---------- Roulette du repas ---------- */
+let ROUL = null;
+// Candidats : les plats de la semaine (échangés avec un jour à venir, ingrédients déjà prévus)
+// et les autres recettes qui gardent la semaine sous le budget. Toujours dans les macros du jour.
+function applyMove(c, mi){
+  const d = planDay(TODAY), cur = d.meals[mi];
+  if (c.from){ const o = S.plan.days[c.from.di]; o.meals[c.from.mi] = cur; }
+  d.meals[mi] = c.id;
+  return () => { d.meals[mi] = cur; if (c.from) S.plan.days[c.from.di].meals[c.from.mi] = c.id; };
+}
+function rouletteCands(mi){
+  const d = planDay(TODAY); if (!d) return [];
+  const cur = d.meals[mi], T = needs().types[d.t], bw = budgetWeek(), out = new Map();
+  const tryC = c => {
+    if (out.has(c.id)) return;
+    const undo = applyMove(c, mi), sc = score(S.plan), m = dayMacros(d); undo();
+    if (sc.cost <= bw + 0.005 && Math.abs(m.kcal - T.kcal)/T.kcal < 0.15 && m.P >= T.P*0.85) out.set(c.id, Object.assign(c, {s:sc.s}));
+  };
+  S.plan.days.forEach((o, di) => { if (o.date <= TODAY) return; o.meals.forEach((id, mj) => {
+    if (id === cur || d.meals.includes(id) || eatenOf(o.date)[mj] || swapOf(o.date, mj)) return;
+    if (REC_BY[id].s.includes(mi+1) && REC_BY[cur].s.includes(mj+1)) tryC({id, from:{di, mi:mj}});
+  }); });
+  for (const id of pool(mi+1)) if (id !== cur && !d.meals.includes(id)) tryC({id, from:null});
+  const top = [...out.values()].sort((a, b) => (a.from ? 0 : 1) - (b.from ? 0 : 1) || a.s - b.s).slice(0, 8);
+  for (let i = top.length - 1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [top[i], top[j]] = [top[j], top[i]]; }
+  return top;
+}
+function wheelSVG(ids){
+  const n = ids.length, seg = 360/n, R = 130, C = 140, cols = ["var(--accent)","var(--raised)","var(--prot)","var(--track)"];
+  const pt = (deg, r) => { const a = (deg - 90)*Math.PI/180; return [C + r*Math.cos(a), C + r*Math.sin(a)]; };
+  return `<svg viewBox="0 0 280 280" width="260" height="260" id="wheel" style="transform:rotate(${ROUL.rot}deg)">
+    ${ids.map((id, k) => { const [x1, y1] = pt(k*seg, R), [x2, y2] = pt((k+1)*seg, R), [ex, ey] = pt((k+.5)*seg, 90);
+      return `<path d="M${C},${C} L${x1},${y1} A${R},${R} 0 ${seg > 180 ? 1 : 0} 1 ${x2},${y2}Z" fill="${cols[n % 4 === 1 && k === n-1 ? 2 : k % 4]}" stroke="var(--bg)" stroke-width="3"/>
+        <text x="${ex}" y="${ey}" font-size="28" text-anchor="middle" dominant-baseline="central">${(DISH[id] || ["🍽️"])[0]}</text>`; }).join("")}
+    <circle cx="${C}" cy="${C}" r="22" fill="var(--surface)" stroke="var(--line)" stroke-width="3"/></svg>`;
+}
+function rouletteSheet(){
+  const d = planDay(TODAY);
+  if (!d) return `<div class="grab"></div><h2>Roulette du repas</h2><p class="muted">Pas de menu pour aujourd'hui : génère d'abord ta semaine.</p><button class="ghost" data-act="close">Fermer</button>`;
+  if (!ROUL.c){ ROUL.c = rouletteCands(ROUL.mi); if (ROUL.c.length) ROUL.c.splice(Math.floor(Math.random()*(ROUL.c.length+1)), 0, {id:ROUL.cur, keep:true}); }
+  const ids = ROUL.c.map(c => c.id), rc = ROUL.res, r = rc ? REC_BY[rc.id] : null;
+  let res = "";
+  if (r && rc.keep) res = `<div class="card tight"><div class="label">La roue a choisi</div><h3>${r.n}</h3><p class="small muted">C'est ton plat prévu : on ne change rien.</p></div>`;
+  else if (r){ const undo = applyMove(rc, ROUL.mi), s = solveMeal(r, d.t).m, cost = score(S.plan).cost; undo();
+    res = `<div class="card tight"><div class="label">La roue a choisi</div><h3>${r.n}</h3>
+      <div class="mmeta"><span>${n0(s.kcal)} kcal</span><span>${n0(s.P)} g prot.</span><span class="price">${eur(s.cost)}</span></div>
+      <p class="small muted">${rc.from ? `Il était prévu ${fmtDay(S.plan.days[rc.from.di].date)} : ${REC_BY[ROUL.cur].n} prend sa place ce jour-là. ` : ""}Courses de la semaine : ${eur(cost)} sur ${eur(budgetWeek())}.</p></div>
+      <button class="primary" data-act="roul-take">Je prends ça</button>`; }
+  return `<div class="grab"></div><h2>Roulette du repas</h2>
+    <p class="muted">Tu hésites ? La roue tourne parmi les plats de ta semaine et ceux qui rentrent encore dans ton budget, toujours dans tes macros du jour.</p>
+    <div class="typepick two">${["Midi","Soir"].map((n, mi) => `<button class="${ROUL.mi === mi ? "on" : ""}" data-act="roul-mi" data-mi="${mi}">${n}<span class="small muted">${REC_BY[d.meals[mi]].n}</span></button>`).join("")}</div>
+    ${ids.length < 2 ? `<p class="muted">Ton budget de la semaine est trop serré pour changer ce repas (il reste ${eur(Math.max(0, budgetWeek() - score(S.plan).cost))}). Essaie l'autre créneau.</p>` : `
+    <div class="wheel"><div class="ptr" aria-hidden="true"></div>${wheelSVG(ids)}</div>
+    <button class="${r ? "" : "primary"}" data-act="roul-spin" ${ROUL.spinning ? "disabled" : ""}>${ROUL.spinning ? "Ça tourne…" : r ? "Relancer la roue" : "Lancer la roue"}</button>`}
+    <div id="roul-res">${res}</div>
+    <button class="ghost" data-act="close">Fermer</button>`;
+}
+function spin(){
+  const ids = ROUL.c, n = ids.length, k = Math.floor(Math.random()*n), seg = 360/n;
+  const target = ((360 - (k + .5)*seg) % 360 + 360) % 360;
+  ROUL.rot += 360*5 + ((target - ROUL.rot % 360) % 360 + 360) % 360;
+  ROUL.spinning = true; ROUL.res = null;
+  const b = document.querySelector('[data-act="roul-spin"]'); if (b){ b.disabled = true; b.textContent = "Ça tourne…"; }
+  $("#roul-res").innerHTML = "";
+  const w = $("#wheel"); w.style.transition = "transform 3.4s cubic-bezier(.15,.7,.15,1)"; w.style.transform = `rotate(${ROUL.rot}deg)`;
+  setTimeout(() => { if (!ROUL) return; ROUL.spinning = false; ROUL.res = ids[k]; renderSheet(); }, 3500);
+}
+
+/* ---------- Boss de fin de semaine ---------- */
+const BOSSES = [
+  {id:"budget", e:"💰", n:"Le Gardien du Budget", d:"Finis la semaine sous ton budget, repas hors plan compris, avec au moins 10 repas cochés.",
+    f:c => ({p: Math.min(1, c.eaten/10)*(c.cost <= c.bw + .005 ? 1 : .5), ok: c.eaten >= 10 && c.cost <= c.bw + .005, t:`${c.eaten}/10 repas · ${eur(c.cost)} sur ${eur(c.bw)}`})},
+  {id:"prot", e:"🥩", n:"L'Ogre des Protéines", d:"Atteins ta cible de protéines au moins 4 jours dans la semaine.",
+    f:c => ({p: Math.min(1, c.protDays/4), ok: c.protDays >= 4, t:`${c.protDays}/4 jours`})},
+  {id:"ecart", e:"👻", n:"Le Spectre de l'Écart", d:"Zéro repas remplacé cette semaine, et au moins 10 repas du plan cochés.",
+    f:c => ({p: c.swaps ? 0 : Math.min(1, c.eaten/10), ok: !c.swaps && c.eaten >= 10, t: c.swaps ? `${c.swaps} écart${c.swaps > 1 ? "s" : ""}` : `${c.eaten}/10 repas, aucun écart`})},
+  {id:"regul", e:"🗿", n:"Le Titan de la Régularité", d:"Coche au moins 12 repas du plan dans la semaine.",
+    f:c => ({p: Math.min(1, c.eaten/12), ok: c.eaten >= 12, t:`${c.eaten}/12 repas`})},
+  {id:"canape", e:"🛋️", n:"Le Fantôme du Canapé", d:"Aucune séance reportée cette semaine, et au moins 8 repas cochés.",
+    f:c => ({p: c.skips ? 0 : Math.min(1, c.eaten/8), ok: !c.skips && c.eaten >= 8, t: c.skips ? `${c.skips} séance${c.skips > 1 ? "s" : ""} reportée${c.skips > 1 ? "s" : ""}` : `${c.eaten}/8 repas, aucune séance reportée`})},
+  {id:"balance", e:"⚖️", n:"La Balance Maudite", d:"Pèse-toi aujourd'hui et coche au moins 10 repas dans la semaine.",
+    f:c => ({p: (c.weighed ? .5 : 0) + Math.min(.5, c.eaten/20), ok: c.weighed && c.eaten >= 10, t:`${c.weighed ? "Pesée faite" : "Pas encore pesé"} · ${c.eaten}/10 repas`})},
+];
+function bossCtx(){
+  const N = needs(), from = addDays(TODAY, -6);
+  let eaten = 0, swaps = 0, protDays = 0;
+  for (let k = 0; k <= 6; k++){
+    const date = addDays(from, k), e = eatenOf(date), d = planDay(date); let P = 0;
+    [0,1].forEach(mi => { if (swapOf(date, mi)) swaps++; else if (e[mi]) eaten++;
+      if (e[mi]) P += swapOf(date, mi) ? swapOf(date, mi).P : d ? mealMacros(d, mi).P : N.types[typeOf(date)].P/2; });
+    if (P >= N.types[typeOf(date)].P*0.95) protDays++;
+  }
+  return {eaten, swaps, protDays, cost: shopping(aggregate(S.plan)).cost + extraCost(), bw: budgetWeek(),
+    skips: S.shifts.filter(s => s.d >= from && s.d <= TODAY && s.from !== 2 && s.to === 2).length, weighed: S.weights.some(w => w.d === TODAY)};
+}
+const bossOf = start => BOSSES[Math.abs([...start].reduce((h, ch) => h*31 + ch.charCodeAt(0), 7)) % BOSSES.length];
+const bossWins = () => Object.values(S.boss).filter(v => v === "won").length;
+function bossCard(){
+  if (!S.plan || parse(TODAY).getDay() !== 0) return "";
+  const b = bossOf(TODAY), r = b.f(bossCtx()), won = S.boss[TODAY] === "won", hp = won ? 0 : Math.round((1 - r.p)*100);
+  return `<div class="card boss ${won ? "won" : ""}"><div class="row between"><span class="label">Boss de fin de semaine</span><span class="chip">${won ? "Vaincu" : "Défi du dimanche"}</span></div>
+    <div class="row" style="flex-wrap:nowrap;gap:14px"><div class="bface" aria-hidden="true">${won ? "💥" : b.e}</div><div><h3>${b.n}</h3><p class="small muted">${b.d}</p><p class="small muted">Compté sur les 7 derniers jours.</p></div></div>
+    <div><div class="row between small"><span class="muted">PV du boss</span><span>${hp} %</span></div><div class="gauge hp"><i style="width:${hp}%"></i></div><div class="small muted">${r.t}</div></div>
+    ${won ? `<p class="small">Vaincu ! Trophées : ${bossWins()}.</p>` : r.ok ? `<button class="primary" data-act="boss-win">Porter le coup final</button>` : `<p class="small muted">Récompense : un trophée${bossWins() ? "" : ", et le thème secret Titan pour ton premier boss"}.</p>`}</div>`;
+}
+BADGES.push({id:"boss1", e:"🗡️", n:"1er boss vaincu", ok:() => bossWins() >= 1}, {id:"gold1", e:"🥇", n:"1er plat en or", ok:() => S.goldSeen.length >= 1}, {id:"pig10", e:"🐷", n:"10 € dans le cochon", ok:() => piggyTotal() >= 10});
+
+/* ---------- Raccords avec l'affichage ---------- */
+const _renderF2 = render;
+render = function(){
+  const gold = syncLoyal(), tot = piggyTotal(), newT = TIERS.filter(k => tot >= k.tier && unlock(k.id));
+  if (gold.length || newT.length) save();
+  _renderF2();
+  if (newT.length){ const k = newT[newT.length-1]; toast(coachLine("pig", {x:eur(k.tier), t:k.n})); }
+  else if (gold.length) toast(coachLine("gold", {r:REC_BY[gold[0]].n}));
+};
+const _renderTodayF2 = renderToday;
+renderToday = function(){
+  _renderTodayF2();
+  const el = $("#v-today"), anchor = el.querySelector(".alert") || el.querySelector(".hero");
+  anchor.insertAdjacentHTML("afterend", coachCard() + bossCard());
+  const al = el.querySelector(".alert p"); if (al) al.textContent = coachLine("skip", {n:skipsRecent().length});
+  const mc = el.querySelectorAll(".mealcard");
+  if (mc.length) mc[mc.length-1].insertAdjacentHTML("afterend", `<button class="ghost roulbtn" data-act="roul-open">🎰 Tu hésites ? Lance la roulette du repas</button>`);
+};
+const _renderProgresF = renderProgres;
+renderProgres = function(){
+  _renderProgresF();
+  const el = $("#v-progres");
+  el.querySelector("h2").insertAdjacentHTML("afterend", avatarCard());
+  const cards = el.querySelectorAll(":scope > .card"); cards[cards.length-1].insertAdjacentHTML("beforebegin", pigCard() + loyaltyCard());
+};
+const _renderProfilF2 = renderProfil;
+renderProfil = function(){ _renderProfilF2(); $("#v-profil > h2").insertAdjacentHTML("afterend", coachPick()); };
+const _mealCardF = mealCard;
+mealCard = function(d, di, mi){
+  const h = _mealCardF(d, di, mi);
+  return !swapOf(d.date, mi) && stamps(d.meals[mi]) >= GOLD ? h.replace('<div class="mtitle">', '<div class="mtitle">🥇 ') : h;
+};
+const _renderSheetF2 = renderSheet;
+renderSheet = function(){
+  if (SHEET && (SHEET.mode === "avatar" || SHEET.mode === "roulette")){
+    $("#sheet-body").innerHTML = SHEET.mode === "avatar" ? avatarSheet() : rouletteSheet();
+    $("#sheet").hidden = false; return;
+  }
+  if (!SHEET || !SHEET.mode) ROUL = null;
+  _renderSheetF2();
+  if (SHEET && !SHEET.mode && S.plan && S.plan.days[SHEET.di]){
+    const rid = S.plan.days[SHEET.di].meals[SHEET.mi], mr = $("#sheet-body .macrorow");
+    if (mr) mr.insertAdjacentHTML("afterend", stampsHTML(rid));
+  }
+};
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-act]"); if (!a) return;
+  switch (a.dataset.act){
+    case "coach": S.coach = a.dataset.id; save(); render(); toast(`${coach().n} : ${coachLine("t" + typeOf(TODAY), {kcal:n0(needs().types[typeOf(TODAY)].kcal), P:needs().types[typeOf(TODAY)].P})}`); break;
+    case "shift": { const last = S.shifts.find(s => s.d === TODAY);
+      if (last && last.from !== 2 && last.to === 2){ const nx = [1,2,3].map(k => addDays(TODAY, k)).find(dt => typeOf(dt) !== 2);
+        toast(coachLine("shift", {next: TYPES[nx ? typeOf(nx) : 0].n, n: skipsRecent().length})); } break; }
+    case "av-open": SHEET = {mode:"avatar"}; renderSheet(); break;
+    case "av": { const k = a.dataset.k; S.avatar[k] = ["skin","hc","oc"].includes(k) ? +a.dataset.v : a.dataset.v; save(); renderSheet(); renderProgres(); break; }
+    case "roul-open": { const d = planDay(TODAY); ROUL = {mi: new Date().getHours() < 15 ? 0 : 1, rot:0, cur: d ? d.meals[new Date().getHours() < 15 ? 0 : 1] : null}; SHEET = {mode:"roulette"}; renderSheet(); break; }
+    case "roul-mi": if (ROUL.spinning) break; ROUL = {mi:+a.dataset.mi, rot:0, cur: planDay(TODAY).meals[+a.dataset.mi]}; renderSheet(); break;
+    case "roul-spin": if (!ROUL.spinning) spin(); break;
+    case "roul-keep": ROUL = null; SHEET = null; renderSheet(); break;
+    case "roul-take": { const r = REC_BY[ROUL.res.id]; applyMove(ROUL.res, ROUL.mi); ROUL = null; SHEET = null; save(); render(); toast(`Va pour ${r.n} !`); break; }
+    case "boss-win": S.boss[TODAY] = "won"; { const first = unlock("titan"); save(); render(); toast(coachLine("boss") + (first ? " Thème secret Titan débloqué." : "")); } break;
+  }
+});
+document.addEventListener("change", e => {
+  if (e.target.id === "pig-goal"){ S.piggy.goal = e.target.value.trim() || FUN_DEF.piggy.goal; save(); renderProgres(); }
+  if (e.target.id === "pig-target"){ const v = +e.target.value; if (v > 0){ S.piggy.target = v; save(); renderProgres(); } }
+});
 
 /* ---------- Appli installable : installation, rappels, sauvegarde ---------- */
 let installEvt = null;
