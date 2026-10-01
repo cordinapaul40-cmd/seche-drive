@@ -757,8 +757,8 @@ function optimize(start){
   const p1 = pool(1), p2 = pool(2);
   if (!p1.length || !p2.length) return null;
   let best = null, bestS = Infinity;
-  for (let restart = 0; restart < 30; restart++){
-    if (restart >= 4 && best && score(best).cost <= budgetWeek()) break;
+  for (let restart = 0; restart < 60; restart++){
+    if (restart >= 4 && best && score(best).cost <= budgetWeek()) break; // jusqu'à 60 essais tant que la semaine dépasse le budget
     const plan = emptyPlan(start);
     plan.days.forEach(d => d.meals = [pick(p1), pick(p2)]);
     let cur = score(plan).s;
@@ -781,7 +781,21 @@ function optimize(start){
       } else { plan.days[di].meals[mi] = old; if (old2 !== undefined) plan.days[dj].meals[mj] = old2; }
     }
   }
-  return best;
+  return best && score(best).cost > budgetWeek() + 0.005 ? squeeze(best) : best;
+}
+// Filet de sécurité : si le recuit finit au-dessus du budget, on remplace repas par repas
+// la recette qui fait le plus baisser les courses, jusqu'à repasser sous le budget.
+function squeeze(plan){
+  const bw = budgetWeek();
+  let cur = shopping(aggregate(plan)).cost;
+  for (let pass = 0; pass < 6 && cur > bw + 0.005; pass++){
+    for (let di = 0; di < 7 && cur > bw + 0.005; di++) for (let mi = 0; mi < 2 && cur > bw + 0.005; mi++){
+      const d = plan.days[di]; let bestId = d.meals[mi], bestC = cur;
+      for (const id of pool(mi+1)){ d.meals[mi] = id; const c = shopping(aggregate(plan)).cost; if (c < bestC - 1e-9){ bestC = c; bestId = id; } }
+      d.meals[mi] = bestId; cur = bestC;
+    }
+  }
+  return plan;
 }
 function generate(msg){
   // Laisse l'écran afficher le message avant le calcul, qui peut prendre quelques secondes sur téléphone.
@@ -1421,8 +1435,9 @@ document.addEventListener("input", e => { if (e.target.id && e.target.id.startsW
 document.addEventListener("change", e => { if (e.target.id && e.target.id.startsWith("o-")) otherUI(); });
 
 /* ---------- État des fonctions ludiques ---------- */
-const FUN_DEF = {coach:"pote", boss:{}, avatar:{skin:1, hair:"court", hc:0, beard:"non", top:"nu", oc:0, acc:"non"}, loyal:{}, goldSeen:[], unlocked:[], piggy:{goal:"Nouvelle paire de baskets", target:80}};
+const FUN_DEF = {coach:"pote", boss:{}, avatar:{skin:1, hair:"court", hc:0, beard:"non", top:"nu", oc:0, acc:"non"}, loyal:{}, goldSeen:[], unlocked:[], piggy:{goal:"Nouvelle paire de baskets", target:300, v:2}};
 for (const k in FUN_DEF) if (S[k] === undefined) S[k] = JSON.parse(JSON.stringify(FUN_DEF[k]));
+if (S.piggy.v !== 2){ S.piggy.target = 300; S.piggy.v = 2; }
 for (const k in FUN_DEF.avatar) if (S.avatar[k] === undefined) S.avatar[k] = FUN_DEF.avatar[k];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const dayNum = () => diffDays(TODAY, "2026-01-01");
@@ -1439,7 +1454,7 @@ const COACHES = {
     skip:["{n} séances reportées en 2 semaines ? Inacceptable. Sac prêt ce soir, pas de discussion.","{n} reports, soldat. L'ennemi s'appelle Canapé, et il est en train de gagner."],
     shift:["Encore une séance décalée, soldat ? {next} t'attend, et je surveille.","Séance reportée. {next} au programme, ne me fais pas répéter."],
     boss:["Boss abattu ! Voilà un soldat qui mérite ses galons."], gold:["{r} passe en or. Même moi, je salue."],
-    pig:["{x} au trésor de guerre. Thème secret « {t} » débloqué, soldat."]}},
+    pig:["{x} pièces au trésor, soldat. Thème secret « {t} » débloqué."]}},
   pote:{e:"🤙", n:"Max, ton pote", d:"Cool et toujours positif", L:{
     t0:["C'est Leg Day ! Grosse séance, et après on mange bien.","Jambes aujourd'hui. Ce soir t'as le droit de prendre l'ascenseur."],
     t1:["Haut du corps aujourd'hui, ça va pomper ! Profite.","Séance haut du corps : propre, tranquille, et on lâche rien."],
@@ -1450,7 +1465,7 @@ const COACHES = {
     skip:["{n} séances décalées en 2 semaines… Je sais que c'est dur, mais tu vaux mieux que ça. On y retourne ?","{n} reports, ça commence à faire. Juste l'échauffement à la prochaine, deal ?"],
     shift:["Pas de souci, on décale. Prochaine séance : {next}, je compte sur toi !","OK, séance décalée. {next} ensuite, on se rattrape."],
     boss:["Boss battu ! T'es chaud cette semaine."], gold:["{r} en version or ! Tu deviens un vrai chef."],
-    pig:["{x} d'économisés, trop fort ! Thème secret « {t} » débloqué."]}},
+    pig:["{x} pièces dans le cochon, trop fort ! Thème secret « {t} » débloqué."]}},
   mamie:{e:"👵", n:"Mamie Jo", d:"Tendre, mais elle veut que tu manges", L:{
     t0:["Ah, les jambes aujourd'hui mon petit ! Et tu finis ton assiette.","Leg Day ? De mon temps, on appelait ça monter au grenier. Courage, mon chéri."],
     t1:["Les bras et le dos aujourd'hui. Tu me porteras mes courses après ?","Haut du corps, très bien. N'oublie pas ta veste en sortant de la salle."],
@@ -1461,7 +1476,7 @@ const COACHES = {
     skip:["{n} séances repoussées en 2 semaines, mon chéri ? Ton grand-père aurait dit : un peu de nerf !","{n} fois que tu repousses… Je t'ai tricoté de la motivation : enfile-la et vas-y."],
     shift:["Encore une séance repoussée ? Bon, la prochaine c'est {next}, et je te prépare ton sac.","Tu décales encore ? D'accord, mais {next}, tu y vas. Promis ?"],
     boss:["Tu as gagné ton défi ! Viens que je t'embrasse."], gold:["{r} en or ! Tu cuisines presque aussi bien que moi."],
-    pig:["{x} de côté, quel petit économe ! Tiens, le thème « {t} » pour toi."]}},
+    pig:["{x} pièces, tu manges enfin comme il faut ! Tiens, le thème « {t} » pour toi."]}},
   robot:{e:"🤖", n:"Unité S-3000", d:"Froid, précis, chiffré", L:{
     t0:["Protocole Leg Day activé. Apport en glucides augmenté de 7 %.","Jour jambes détecté. Cible : {kcal} kcal, {P} g de protéines."],
     t1:["Protocole haut du corps. Cible : {P} g de protéines. Exécution.","Séance haut du corps planifiée. Glucides modérés, protéines maximales."],
@@ -1472,7 +1487,7 @@ const COACHES = {
     skip:["Anomalie : {n} séances reportées en 14 jours. Risque de stagnation en hausse.","{n} reports détectés. Recommandation : séance courte, 30 minutes."],
     shift:["Séance reportée. Cycle recalibré : {next} à la prochaine séance.","Report enregistré. Prochaine séance : {next}."],
     boss:["Boss neutralisé. Récompense transférée."], gold:["Recette {r} : statut or. Astuce débloquée."],
-    pig:["Épargne : {x}. Palier franchi. Thème « {t} » déverrouillé."]}},
+    pig:["Réserve : {x} pièces. Palier franchi. Thème « {t} » déverrouillé."]}},
 };
 const coach = () => COACHES[S.coach] || COACHES.pote;
 function coachLine(key, v = {}){
@@ -1488,7 +1503,8 @@ function coachCard(){
   else if (d && [0,1].some(mi => swapOf(TODAY, mi))) key = "swap";
   const c = coach();
   return `<div class="card tight coach"><div class="cface" aria-hidden="true">${c.e}</div>
-    <div><div class="label">${c.n}</div><p>${esc(coachLine(key, {kcal:n0(T.kcal), P:T.P, over:eur(cost - bw)}))}</p></div></div>`;
+    <div><div class="label">${c.n}</div><p>${esc(coachLine(key, {kcal:n0(T.kcal), P:T.P, over:eur(cost - bw)}))}</p>
+    ${d && coinsOf(TODAY) < 3 ? `<p class="small muted">🐷 Encore ${pz(3 - coinsOf(TODAY))} à gagner aujourd'hui en mangeant tes repas.</p>` : ""}</div></div>`;
 }
 function coachPick(){
   return `<div class="card"><h3>Ton coach</h3><p class="small muted">Il change le ton des messages et des alertes.</p>
@@ -1498,10 +1514,10 @@ function coachPick(){
 
 /* ---------- Thèmes secrets (cochon tirelire et boss) ---------- */
 SKINS.push(
-  {id:"or", n:"Or", d:"Noir et or, gravé", c:["#0E0C07","#E8B923","#7FB7FF","#FBF4E2"], meta:"#0E0C07", f:"Cinzel:wght@700;900", secret:"pig", tier:10},
-  {id:"lave", n:"Lave", d:"Rouge braise et orange", c:["#120806","#FF4D1A","#5EC8FF","#FFF1EA"], meta:"#120806", f:"Anton", secret:"pig", tier:25},
-  {id:"galaxie", n:"Galaxie", d:"Violet cosmique étoilé", c:["#070818","#8C7CFF","#3FE0FF","#EEF0FF"], meta:"#070818", f:"Audiowide&family=Exo+2:wght@400;500;600;700", secret:"pig", tier:50},
-  {id:"diamant", n:"Diamant", d:"Clair, bleu glacier", c:["#F1F7FB","#0B8FD6","#7A5CFF","#0E2233"], meta:"#F1F7FB", f:"Montserrat:wght@500;600;700;800", secret:"pig", tier:100},
+  {id:"or", n:"Or", d:"Noir et or, gravé", c:["#0E0C07","#E8B923","#7FB7FF","#FBF4E2"], meta:"#0E0C07", f:"Cinzel:wght@700;900", secret:"pig", tier:20},
+  {id:"lave", n:"Lave", d:"Rouge braise et orange", c:["#120806","#FF4D1A","#5EC8FF","#FFF1EA"], meta:"#120806", f:"Anton", secret:"pig", tier:50},
+  {id:"galaxie", n:"Galaxie", d:"Violet cosmique étoilé", c:["#070818","#8C7CFF","#3FE0FF","#EEF0FF"], meta:"#070818", f:"Audiowide&family=Exo+2:wght@400;500;600;700", secret:"pig", tier:100},
+  {id:"diamant", n:"Diamant", d:"Clair, bleu glacier", c:["#F1F7FB","#0B8FD6","#7A5CFF","#0E2233"], meta:"#F1F7FB", f:"Montserrat:wght@500;600;700;800", secret:"pig", tier:200},
   {id:"titan", n:"Titan", d:"Acier et vert électrique", c:["#0B0F0D","#39FF88","#4FC3F7","#EAF7EE"], meta:"#0B0F0D", f:"Russo+One", secret:"boss"},
 );
 if (!S.unlocked.includes(S.skin) && SKINS.find(k => k.id === S.skin && k.secret)) S.skin = "sport";
@@ -1513,7 +1529,7 @@ skinsCard = function(){
         <div style="display:flex;gap:6px"><i style="flex:2;background:${k.c[1]}"></i><i style="flex:1;background:${k.c[2]}"></i></div></div>
       <span class="nm">${k.n}${S.skin === k.id ? " ✓" : ""}</span><span class="ds">${k.d}</span></button>`;
   const locked = k => `<div class="skin locked" aria-label="Thème secret verrouillé"><div class="mock">🔒</div>
-      <span class="nm">Thème secret</span><span class="ds">${k.secret === "pig" ? `Cochon tirelire : ${k.tier} € économisés` : "Bats ton premier boss du dimanche"}</span></div>`;
+      <span class="nm">Thème secret</span><span class="ds">${k.secret === "pig" ? `Cochon tirelire : ${k.tier} pièces` : "Bats ton premier boss du dimanche"}</span></div>`;
   return `<div class="card"><div class="row between"><h3>Thèmes</h3><span class="label">${free.length + S.unlocked.length} / ${SKINS.length}</span></div>
     <p class="small muted">Change toute l'apparence de l'appli. Tes données et les fonctions restent les mêmes.</p>
     <div class="skins">${free.map(tile).join("")}</div>
@@ -1527,27 +1543,26 @@ function unlock(id){
 
 /* ---------- Cochon tirelire ---------- */
 const TIERS = SKINS.filter(k => k.secret === "pig");
-function extraBetween(a, b){
-  let s = 0; for (const date in S.swaps) if (date >= a && date <= b) for (const mi in S.swaps[date]) s += S.swaps[date][mi].cost || 0;
-  return s;
+
+// 1 pièce par repas du plan réellement mangé, +1 bonus quand les 2 repas de la journée sont mangés (repas remplacés exclus).
+function coinsOf(date){
+  const e = S.eaten[date] || [false, false], ok = [0,1].map(mi => !!e[mi] && !swapOf(date, mi));
+  return ok[0] + ok[1] + (ok[0] && ok[1] ? 1 : 0);
 }
-function piggyWeeks(){
-  const byStart = {}; S.history.forEach(h => byStart[h.start] = h);
-  return Object.values(byStart).map(h => ({start:h.start, saved: Math.max(0, h.budget - h.cost - extraBetween(h.start, addDays(h.start, 6)))}));
-}
-const piggyTotal = () => piggyWeeks().reduce((a, w) => a + w.saved, 0);
+const piggyTotal = () => Object.keys(S.eaten).reduce((a, d) => a + coinsOf(d), 0);
+const pz = n => `${n0(n)} pièce${n > 1 ? "s" : ""}`;
 function pigCard(){
-  const tot = piggyTotal(), next = TIERS.find(k => tot < k.tier), g = S.piggy, prev = next ? (TIERS[TIERS.indexOf(next)-1] || {tier:0}).tier : 0;
-  return `<div class="card pig"><div class="row between"><h2>Cochon tirelire</h2><span class="label">${piggyWeeks().length} semaine${piggyWeeks().length > 1 ? "s" : ""} validée${piggyWeeks().length > 1 ? "s" : ""}</span></div>
+  const tot = piggyTotal(), next = TIERS.find(k => tot < k.tier), g = S.piggy, prev = next ? (TIERS[TIERS.indexOf(next)-1] || {tier:0}).tier : 0, today = coinsOf(TODAY);
+  return `<div class="card pig"><div class="row between"><h2>Cochon tirelire</h2><span class="label">Aujourd'hui : ${today} / 3</span></div>
     <div class="row" style="flex-wrap:nowrap;gap:16px"><div class="pigface" aria-hidden="true">🐷</div>
-      <div><div class="big price">${eur(tot)}</div><div class="small muted">économisés sous le budget</div></div></div>
-    ${next ? `<div><div class="row between small"><span class="muted">Prochain thème secret</span><span>${eur(tot)} / ${eur(next.tier)}</span></div>
+      <div><div class="big price">${pz(tot)}</div><div class="small muted">gagnées en mangeant tes repas</div></div></div>
+    ${next ? `<div><div class="row between small"><span class="muted">Prochain thème secret</span><span>${n0(tot)} / ${next.tier}</span></div>
       <div class="gauge"><i style="width:${Math.min(100, (tot - prev)/(next.tier - prev)*100)}%;background:var(--warn)"></i></div></div>` : `<p class="small">Tous les thèmes secrets du cochon sont débloqués.</p>`}
-    <div class="tiers">${TIERS.map(k => `<div class="tier ${S.unlocked.includes(k.id) ? "on" : ""}"><b>${k.tier} €</b><span>${S.unlocked.includes(k.id) ? k.n : "🔒 secret"}</span></div>`).join("")}</div>
-    <div class="form"><label>Mon objectif<input type="text" id="pig-goal" value="${esc(g.goal)}" maxlength="40"></label><label>Prix (€)<input type="number" id="pig-target" min="1" step="1" value="${g.target}"></label></div>
+    <div class="tiers">${TIERS.map(k => `<div class="tier ${S.unlocked.includes(k.id) ? "on" : ""}"><b>${k.tier}</b><span>${S.unlocked.includes(k.id) ? k.n : "🔒 secret"}</span></div>`).join("")}</div>
+    <div class="form"><label>Ma récompense<input type="text" id="pig-goal" value="${esc(g.goal)}" maxlength="40"></label><label>À (pièces)<input type="number" id="pig-target" min="1" step="1" value="${g.target}"></label></div>
     <div><div class="row between small"><span class="muted">${esc(g.goal)}</span><span>${Math.min(100, Math.round(tot/g.target*100))} %</span></div>
       <div class="gauge"><i style="width:${Math.min(100, tot/g.target*100)}%;background:var(--ok)"></i></div></div>
-    <p class="small muted">Quand tu valides tes courses (écran Courses), ce qui reste sous le budget de la semaine tombe dans le cochon, moins ce que tu as dépensé hors plan.</p></div>`;
+    <p class="small muted">1 pièce par repas du plan coché « mangé », plus 1 pièce bonus quand tu manges tes 2 repas dans la journée. Un repas remplacé par autre chose ne rapporte rien.</p></div>`;
 }
 
 /* ---------- Carte de fidélité des recettes ---------- */
@@ -1782,7 +1797,7 @@ function bossCard(){
     <div><div class="row between small"><span class="muted">PV du boss</span><span>${hp} %</span></div><div class="gauge hp"><i style="width:${hp}%"></i></div><div class="small muted">${r.t}</div></div>
     ${won ? `<p class="small">Vaincu ! Trophées : ${bossWins()}.</p>` : r.ok ? `<button class="primary" data-act="boss-win">Porter le coup final</button>` : `<p class="small muted">Récompense : un trophée${bossWins() ? "" : ", et le thème secret Titan pour ton premier boss"}.</p>`}</div>`;
 }
-BADGES.push({id:"boss1", e:"🗡️", n:"1er boss vaincu", ok:() => bossWins() >= 1}, {id:"gold1", e:"🥇", n:"1er plat en or", ok:() => S.goldSeen.length >= 1}, {id:"pig10", e:"🐷", n:"10 € dans le cochon", ok:() => piggyTotal() >= 10});
+BADGES.push({id:"boss1", e:"🗡️", n:"1er boss vaincu", ok:() => bossWins() >= 1}, {id:"gold1", e:"🥇", n:"1er plat en or", ok:() => S.goldSeen.length >= 1}, {id:"pig10", e:"🐷", n:"20 pièces dans le cochon", ok:() => piggyTotal() >= 20});
 
 /* ---------- Raccords avec l'affichage ---------- */
 const _renderF2 = render;
@@ -1790,7 +1805,7 @@ render = function(){
   const gold = syncLoyal(), tot = piggyTotal(), newT = TIERS.filter(k => tot >= k.tier && unlock(k.id));
   if (gold.length || newT.length) save();
   _renderF2();
-  if (newT.length){ const k = newT[newT.length-1]; toast(coachLine("pig", {x:eur(k.tier), t:k.n})); }
+  if (newT.length){ const k = newT[newT.length-1]; toast(coachLine("pig", {x:k.tier, t:k.n})); }
   else if (gold.length) toast(coachLine("gold", {r:REC_BY[gold[0]].n}));
 };
 const _renderTodayF2 = renderToday;
@@ -1832,6 +1847,8 @@ renderSheet = function(){
 document.addEventListener("click", e => {
   const a = e.target.closest("[data-act]"); if (!a) return;
   switch (a.dataset.act){
+    case "eat": { const date = a.dataset.date, on = eatenOf(date)[+a.dataset.mi];
+      if (on) toast(dayDone(date) ? `🐷 +2 pièces : repas mangé et journée complète ! Total : ${pz(piggyTotal())}` : `🐷 +1 pièce. Total : ${pz(piggyTotal())}`); break; }
     case "coach": S.coach = a.dataset.id; save(); render(); toast(`${coach().n} : ${coachLine("t" + typeOf(TODAY), {kcal:n0(needs().types[typeOf(TODAY)].kcal), P:needs().types[typeOf(TODAY)].P})}`); break;
     case "shift": { const last = S.shifts.find(s => s.d === TODAY);
       if (last && last.from !== 2 && last.to === 2){ const nx = [1,2,3].map(k => addDays(TODAY, k)).find(dt => typeOf(dt) !== 2);
